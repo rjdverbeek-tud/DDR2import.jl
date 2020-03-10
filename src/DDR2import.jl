@@ -37,7 +37,7 @@ the DDR2 web portal;
 Pre-tactical traffic forecast - it focusses on the planning phase, from 6 days
 to 1 day before operations. Network pre-tactical planning is supported by the
 NM PREDICT system and can be accessed via the DDR2 portal;
-NEST and SAAM tools - they can be downloaded from DDR2 Web portal and are 
+NEST and SAAM tools - they can be downloaded from DDR2 Web portal and are
 compatible with DDR data. These tools analyse and process a great deal of information for the purpose of facilitating airspace design and capacity planning in Europe.
 
 Users
@@ -60,6 +60,12 @@ See EUROCONTROL NEST Manual Section 9.7 for fileformat descriptions
 
 module DDR2import
 
-
+    include("SO6.jl")
 
 end # module
+
+#TODO Implementation sequence
+"""
+Implementation sequence
+ALL_FT+
+"""
