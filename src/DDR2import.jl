@@ -59,7 +59,6 @@ See EUROCONTROL NEST Manual Section 9.7 for fileformat descriptions
 """
 
 module DDR2import
-
     include("SO6.jl")
 
 end # module

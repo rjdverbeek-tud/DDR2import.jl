@@ -1,14 +1,48 @@
 """
-SO6 fileformat
-See EUROCONTROL NEST Manual for SO6 fileformat description
+Import SO6 fileformat as a DataFrame
+
+See EUROCONTROL NEST Manual for original SO6 fileformat description
+
+    #               Field                   Type    Size    Comment
+    SEGMENT_ID      segment identifier      String          first point name "_" last point name (see note)
+    ADEP            origin of flight        String  4       ICAO code
+    ADES            destination of flight   String  4       ICAO code
+    ACTYPE          aircraft type           String  4
+    DATETIMEBEGINSEGMENT                    DateTime
+    DATETIMEENDSEGMENT                      DateTime
+    FLBEGINSEGMENT  FL begin segment        Int64   1-3
+    FLENDSEGMENT    FL begin segment        Int64   1-3
+    STATUS          flight status           Int64   1       0=climb, 1=descent, 2=cruise
+    CALLSIGN                                String
+    LATBEGINSEGMENT_DEG Latitude of begin of segment in degrees     Float64
+    LONBEGINSEGMENT_DEG Longitude of begin of segment in degrees    Float64
+    LATENDSEGMENT_DEG Latitude of begin of segment in degrees     Float64
+    LONENDSEGMENT_DEG Longitude of begin of segment in degrees Float64
+    FLIGHT_ID       Flight identifier       Int64           Unique ID
+    SEQUENCE        Sequence number         Int64           Start at 1 for new flight
+    SEGMENT_LENGTH_M    Segment length in m Float64         In meters
+    SEGMENT_PARITY  Segment parity          Int64           * see below
+
+    * Segment parity
+    0=NO
+    1=ODD
+    2=EVEN
+    3=ODD_LOW
+    4=EVEN_LOW
+    5=ODD_HIGH
+    6=EVEN_HIGH
+    7 =General Purpose
+    8=General Purpose
+    9=General Purpose
 """
 module SO6
 
 export read
 
-using Format
+include("utility.jl")
 using CSV
 using Dates
+using DataFrames
 
 const fileformat = Dict(1=>String, 2=>String, 3=>String, 4=>String, 5=>String,
 6=>String, 7=>Int64, 8=>Int64, 9=>String, 10=>String, 11=>String, 12=>String,
@@ -23,6 +57,7 @@ const header_format = ["SEGMENT_ID", "ADEP", "ADES", "ACTYPE",
 
 const yymmdd = DateFormat("YYmmdd")
 const hhmmss = DateFormat("HHMMSS")
+const yymmddhhmmss = DateFormat("YYmmddHHMMSS")
 const year2000 = Year(2000)
 
 function read(file)
@@ -32,19 +67,47 @@ function read(file)
     return df
 end
 
+function format_status(str::Union{String, Missing})
+    if str === missing
+        return missing
+    end
+    maybeint = tryparse(Int64, str)
+    if maybeint == nothing
+        return missing
+    else
+        return parse(Int64, str)
+    end
+end
+
 function reformat!(df)
-    #Date conversion
-    df[:,:TIMEBEGINSEGMENT] = format_time.(df[:,:TIMEBEGINSEGMENT], hhmmss)
-    df[:,:TIMEENDSEGMENT] = format_time.(df[:,:TIMEENDSEGMENT], hhmmss)
-    df[:,:DATEBEGINSEGMENT] = format_date.(df[:,:DATEBEGINSEGMENT], yymmdd,
-    addyear=year2000)
-    df[:,:DATEENDSEGMENT] = format_date.(df[:,:DATEENDSEGMENT], yymmdd,
-    addyear=year2000)
+    #Date/Time conversion
+    df[:,:DATETIMEBEGINSEGMENT] = format_datetime.(df[:,:DATEBEGINSEGMENT] .*
+    df[:,:TIMEBEGINSEGMENT], yymmddhhmmss, addyear=year2000)
+
+    df[:,:DATETIMEENDSEGMENT] = format_datetime.(df[:,:DATEENDSEGMENT] .*
+    df[:,:TIMEENDSEGMENT], yymmddhhmmss, addyear=year2000)
+
+    select!(df, Not(:TIMEBEGINSEGMENT))
+    select!(df, Not(:TIMEENDSEGMENT))
+    select!(df, Not(:DATEBEGINSEGMENT))
+    select!(df, Not(:DATEENDSEGMENT))
+
+    df[:,:TEMP] = format_status.(df[:,:STATUS])
+    select!(df, Not(:STATUS))
+    df[:,:STATUS] = df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
     df[:,:LATBEGINSEGMENT_DEG] = df[:,:LATBEGINSEGMENT_DEG] / 60.0
     df[:,:LONBEGINSEGMENT_DEG] = df[:,:LONBEGINSEGMENT_DEG] / 60.0
     df[:,:LATENDSEGMENT_DEG] = df[:,:LATENDSEGMENT_DEG] / 60.0
     df[:,:LONENDSEGMENT_DEG] = df[:,:LONENDSEGMENT_DEG] / 60.0
     df[:,:SEGMENT_LENGTH_M] = df[:,:SEGMENT_LENGTH_M] * 1852.0
+
+    select!(df,[:SEGMENT_ID, :ADEP, :ADES, :ACTYPE, :DATETIMEBEGINSEGMENT,
+    :DATETIMEENDSEGMENT, :FLBEGINSEGMENT, :FLENDSEGMENT, :STATUS, :CALLSIGN,
+    :LATBEGINSEGMENT_DEG, :LONBEGINSEGMENT_DEG, :LATENDSEGMENT_DEG,
+    :LONENDSEGMENT_DEG, :FLIGHT_ID, :SEQUENCE, :SEGMENT_LENGTH_M,
+    :SEGMENT_PARITY])
 end
 
 end # module

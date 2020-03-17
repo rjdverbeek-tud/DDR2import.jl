@@ -1,7 +1,7 @@
-module Format
-
-export format_date, format_datetime, format_time
-
+# module NestFormat
+#
+# export format_date, format_datetime, format_time
+#
 using Dates
 
 function format_date(str::Union{String, Missing}, format; addyear = Year(0))
@@ -47,5 +47,3 @@ function format_time(str::Union{String, Missing}, format)
         end
     end
 end
-
-end #module
