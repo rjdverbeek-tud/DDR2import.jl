@@ -3,37 +3,45 @@ Import SO6 fileformat as a DataFrame
 
 See EUROCONTROL NEST Manual for original SO6 fileformat description
 
-    #               Field                   Type    Size    Comment
-    SEGMENT_ID      segment identifier      String          first point name "_" last point name (see note)
-    ADEP            origin of flight        String  4       ICAO code
-    ADES            destination of flight   String  4       ICAO code
-    ACTYPE          aircraft type           String  4
-    DATETIMEBEGINSEGMENT                    DateTime
-    DATETIMEENDSEGMENT                      DateTime
-    FLBEGINSEGMENT  FL begin segment        Int64   1-3
-    FLENDSEGMENT    FL begin segment        Int64   1-3
-    STATUS          flight status           Int64   1       0=climb, 1=descent, 2=cruise
-    CALLSIGN                                String
-    LATBEGINSEGMENT_DEG Latitude of begin of segment in degrees     Float64
-    LONBEGINSEGMENT_DEG Longitude of begin of segment in degrees    Float64
-    LATENDSEGMENT_DEG Latitude of begin of segment in degrees     Float64
-    LONENDSEGMENT_DEG Longitude of begin of segment in degrees Float64
-    FLIGHT_ID       Flight identifier       Int64           Unique ID
-    SEQUENCE        Sequence number         Int64           Start at 1 for new flight
-    SEGMENT_LENGTH_M    Segment length in m Float64         In meters
-    SEGMENT_PARITY  Segment parity          Int64           * see below
+SO6 DataFrame Column Names
 
-    * Segment parity
-    0=NO
-    1=ODD
-    2=EVEN
-    3=ODD_LOW
-    4=EVEN_LOW
-    5=ODD_HIGH
-    6=EVEN_HIGH
-    7 =General Purpose
-    8=General Purpose
-    9=General Purpose
+#                   Field                   Type    Size    Comment
+SEGMENT_ID          segment identifier      String          first point name "_" last point name (see note)
+ADEP                origin of flight        String  4       ICAO code
+ADES                destination of flight   String  4       ICAO code
+ACTYPE              aircraft type           String  4
+DATETIMEBEGINSEGMENT                        DateTime
+DATETIMEENDSEGMENT                          DateTime
+FLBEGINSEGMENT      FL begin segment        Int64   1-3
+FLENDSEGMENT        FL begin segment        Int64   1-3
+STATUS              flight status           Int64   1       0=climb, 1=descent, 2=cruise
+CALLSIGN                                    String
+LATBEGINSEGMENT_DEG Latitude of begin of segment in degrees     Float64
+LONBEGINSEGMENT_DEG Longitude of begin of segment in degrees    Float64
+LATENDSEGMENT_DEG   Latitude of begin of segment in degrees     Float64
+LONENDSEGMENT_DEG   Longitude of begin of segment in degrees Float64
+FLIGHT_ID           Flight identifier       Int64           Unique ID
+SEQUENCE            Sequence number         Int64           Start at 1 for new flight
+SEGMENT_LENGTH_M    Segment length in m     Float64         In meters
+SEGMENT_PARITY      Segment parity          Int64           * see below
+
+* Segment parity
+0=NO
+1=ODD
+2=EVEN
+3=ODD_LOW
+4=EVEN_LOW
+5=ODD_HIGH
+6=EVEN_HIGH
+7 =General Purpose
+8=General Purpose
+9=General Purpose
+
+Example SO6 file format
+EHAM_*AM80 EHAM UUEE A321 214900 214926 0 10 0 AFL2193 171214 171214 3138.483333 285.850000 3137.483333 284.183333 213765625 1 1.427867 0
+*AM80_!AAEW EHAM UUEE A321 214926 215004 10 25 0 AFL2193 171214 171214 3137.483333 284.183333 3135.833333 284.033333 213765625 2 1.652550 0
+!AAEW_!AAEX EHAM UUEE A321 215004 215026 25 35 0 AFL2193 171214 171214 3135.833333 284.033333 3134.166667 283.883333 213765625 3 1.669195 0
+!AAEX_*AM46 EHAM UUEE A321 215026 215047 35 45 0 AFL2193 171214 171214 3134.166667 283.883333 3133.066667 283.783333 213765625 4 1.101704 0
 """
 module SO6
 

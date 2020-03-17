@@ -59,12 +59,14 @@ See EUROCONTROL NEST Manual Section 9.7 for fileformat descriptions
 """
 
 module DDR2import
+    include("T5.jl")
     include("SO6.jl")
-
 end # module
 
 #TODO Implementation sequence
 """
 Implementation sequence
+SO6
+T5
 ALL_FT+
 """
