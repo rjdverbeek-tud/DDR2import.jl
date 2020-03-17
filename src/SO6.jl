@@ -6,24 +6,24 @@ See EUROCONTROL NEST Manual for original SO6 fileformat description
 SO6 DataFrame Column Names
 
 #                   Field                   Type    Size    Comment
-SEGMENT_ID          segment identifier      String          first point name "_" last point name (see note)
-ADEP                origin of flight        String  4       ICAO code
-ADES                destination of flight   String  4       ICAO code
-ACTYPE              aircraft type           String  4
-DATETIMEBEGINSEGMENT                        DateTime
-DATETIMEENDSEGMENT                          DateTime
-FLBEGINSEGMENT      FL begin segment        Int64   1-3
-FLENDSEGMENT        FL begin segment        Int64   1-3
-STATUS              flight status           Int64   1       0=climb, 1=descent, 2=cruise
-CALLSIGN                                    String
-LATBEGINSEGMENT_DEG Latitude of begin of segment in degrees     Float64
-LONBEGINSEGMENT_DEG Longitude of begin of segment in degrees    Float64
-LATENDSEGMENT_DEG   Latitude of begin of segment in degrees     Float64
-LONENDSEGMENT_DEG   Longitude of begin of segment in degrees Float64
-FLIGHT_ID           Flight identifier       Int64           Unique ID
-SEQUENCE            Sequence number         Int64           Start at 1 for new flight
-SEGMENT_LENGTH_M    Segment length in m     Float64         In meters
-SEGMENT_PARITY      Segment parity          Int64           * see below
+:SEGMENT_ID          segment identifier      String          first point name "_" last point name (see note)
+:ADEP                origin of flight        String  4       ICAO code
+:ADES                destination of flight   String  4       ICAO code
+:ACTYPE              aircraft type           String  4
+:DATETIMEBEGINSEGMENT                        DateTime
+:DATETIMEENDSEGMENT                          DateTime
+:FLBEGINSEGMENT      FL begin segment        Int64   1-3
+:FLENDSEGMENT        FL begin segment        Int64   1-3
+:STATUS              flight status           Int64   1       0=climb, 1=descent, 2=cruise
+:CALLSIGN                                    String
+:LATBEGINSEGMENT_DEG Latitude of begin of segment in degrees     Float64
+:LONBEGINSEGMENT_DEG Longitude of begin of segment in degrees    Float64
+:LATENDSEGMENT_DEG   Latitude of begin of segment in degrees     Float64
+:LONENDSEGMENT_DEG   Longitude of begin of segment in degrees Float64
+:FLIGHT_ID           Flight identifier       Int64           Unique ID
+:SEQUENCE            Sequence number         Int64           Start at 1 for new flight
+:SEGMENT_LENGTH_M    Segment length in m     Float64         In meters
+:SEGMENT_PARITY      Segment parity          Int64           * see below
 
 * Segment parity
 0=NO

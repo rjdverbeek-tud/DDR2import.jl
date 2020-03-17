@@ -5,24 +5,24 @@ See EUROCONTROL NEST Manual for T5 fileformat description
 T5 DataFrame Column Names
 
 Field               Type    Size    Comment
-FLIGHT_ID           Int64           Flight ID
-SECTOR_NAME         String
-ENTRY_DATETIME      DateTime
-EXIT_DATETIME       DateTime
-ENTRY_FL            Float64         Flight level in decimal
-EXIT_FL             Float64         Flight level in decimal
-ENTRY_SEGMENT_NAME  String          Separator between point name is '_'
+:FLIGHT_ID           Int64           Flight ID
+:SECTOR_NAME         String
+:ENTRY_DATETIME      DateTime
+:EXIT_DATETIME       DateTime
+:ENTRY_FL            Float64         Flight level in decimal
+:EXIT_FL             Float64         Flight level in decimal
+:ENTRY_SEGMENT_NAME  String          Separator between point name is '_'
                                     '##' as a prefix means that the flight was
                                     already present in the sector before it was
                                     opened
-EXIT_SEGMENT_NAME   String          Separator between point name is '_', might
+:EXIT_SEGMENT_NAME   String          Separator between point name is '_', might
                                     be different from ENTRY_SEGMENT_NAME
                                     '##' as a prefix means that the flight was
                                     still present in the sector after it was
                                     closed.
-TOT_DISTANCE_IN_SEGMENT_M Float64   For that FLIGHT_ID in that SECTOR_NAME,
+:TOT_DISTANCE_IN_SEGMENT_M Float64   For that FLIGHT_ID in that SECTOR_NAME,
                                     expressed in meters.
-TOT_TIME_IN_SEGMENT_S Float64       For that FLIGHT_ID in that SECTOR_NAME,
+:TOT_TIME_IN_SEGMENT_S Float64       For that FLIGHT_ID in that SECTOR_NAME,
                                     expressed in seconds.
 
 Example T5 file format

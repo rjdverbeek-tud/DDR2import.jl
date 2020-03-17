@@ -7,6 +7,8 @@ using Dates
 function format_date(str::Union{String, Missing}, format; addyear = Year(0))
     if str === missing
         return missing
+    elseif str == "!!!!"
+        return missing
     end
     maybedate = tryparse(Date, str, format)
     if maybedate == nothing
@@ -20,6 +22,8 @@ end
 
 function format_datetime(str::Union{String, Missing}, format; addyear = Year(0))
     if str === missing
+        return missing
+    elseif occursin("!!!!", str)
         return missing
     end
     maybedatetime = tryparse(DateTime, str, format)
