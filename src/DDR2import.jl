@@ -70,6 +70,6 @@ Implementation sequence
 SO6
 T5
 EXP2
-ARE
 ALL_FT+
+ARE
 """

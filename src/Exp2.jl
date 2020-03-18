@@ -60,43 +60,42 @@ Exp2 DataFrame Column Names
 55  :SUSPENSIONSTATUS               String  NS, ST, SM, RC, TV, NR, RV
 57  :SAMCTOT                        DateTime
 58  :SAMSENT                        String  Y/N
-
-:SIPCTOT
-:SIPSENT
-:SLOTFORCED
-:MOSTPENALIZINGREGID
-:REGAFFECTEDBYNROFINST
-:EXCLFROMNROFINST
-:LASTRECEIVEDATFMMESSAGETITLE
-:LASTRECEIVEDMESSAGETITLE
-:LASTSENTATFMMESSAGETITLE
-:MANUALEXEMPREASON
-:SENSITIVEFLIGHT
-:READYFORIMPROVEMENT
-:READYFORDEP
-:REVISEDTAXITIME
-:TIS
-:TRS
-:TOBESENTSLOTMESSAGE
-:TOBESENTPROPMESSAGETITLE
-:LASTSENTSLOTMESSAGETITLE
-:LASTSENTPROPMESSAGETITLE
-:LASTSENTSLOTMESSAGE
-:LASTSENTPROPMESSAGE
-:FLIGHTCOUNTOPTION
-:NORMALFLIGHTTACT_ID
-:PROPFLIGHTTACT_ID
-:OPERATINGACOPERICAOID
-:REROUTINGWHY
-:REROUTINGLFIGHTSTATE
-:RVR
-:FTFMAIRAC
-:FTFMENVBASELINENUM
-:RTFMAIRAC
-:RTFMENVBASELINENUM
-:CTFMAIRAC
-:CTFMENVBASELINENUM
-:LASTRECEIVEDPROGRESSMESSAGE
+59  :SIPCTOT                        DateTime
+60  :SIPSENT                        String  Y/N
+61  :SLOTFORCED                     String  Y/N
+62  :MOSTPENALIZINGREGID            String  Is it the same as most pen reg on FLF
+63  :REGAFFECTEDBYNROFINST          Int64
+64  :EXCLFROMNROFINST               Int64
+65  :LASTRECEIVEDATFMMESSAGETITLE   String  DES, ERR, FCM, FUM, FLS, REA, RFI, RJT, RRN, RRP, SAM, SIP, SLC, SMM, SPA, SRJ, SRM, SWM, UNK
+66  :LASTRECEIVEDMESSAGETITLE       String  ABI, ACH, ACT, APL, ARR, CAN, CHG, CNL, DEP, DLA, ERR, EST, FPL, FSA, MFS, PAC, PFD, RPL, UNK
+67  :LASTSENTATFMMESSAGETITLE       String  DES, ERR, FCM, FUM, FLS, REA, RFI, RJT, RRN, RRP, SAM, SIP, SLC, SMM, SPA, SRJ, SRM, SWM, UNK
+68  :MANUALEXEMPREASON              String  N/S/R
+69  :SENSITIVEFLIGHT                String  Y/N
+70  :READYFORIMPROVEMENT            String  Y/N
+71  :READYFORDEP                    String  Y/N
+72  :REVISEDTAXITIME                Int64   0..999999
+73  :TIS                            Int64   Time to intert the sequence, 0..999999
+74  :TRS                            Int64   Time to remove the sequence, 0..999999
+75  :TOBESENTSLOTMESSAGE            String  Related to flight progress, ABI, ACH, ACT, APL, ARR, CAN, CHG, CNL, DEP, DLA, ERR, EST, FPL, FSA, MFS, PAC, PFD, RPL, UNK
+76  :TOBESENTPROPMESSAGETITLE       String  Related to flight progress, ABI, ACH, ACT, APL, ARR, CAN, CHG, CNL, DEP, DLA, ERR, EST, FPL, FSA, MFS, PAC, PFD, RPL, UNK
+77  :LASTSENTSLOTMESSAGETITLE       String  Related to flight progress, ABI, ACH, ACT, APL, ARR, CAN, CHG, CNL, DEP, DLA, ERR, EST, FPL, FSA, MFS, PAC, PFD, RPL, UNK
+78  :LASTSENTPROPMESSAGETITLE       String  Related to flight progress, ABI, ACH, ACT, APL, ARR, CAN, CHG, CNL, DEP, DLA, ERR, EST, FPL, FSA, MFS, PAC, PFD, RPL, UNK
+79  :LASTSENTSLOTMESSAGE            DateTime Related to flight progress
+80  :LASTSENTPROPMESSAGE            DateTime Related to flight progress
+81  :FLIGHTCOUNTOPTION              String  Indicates which flight plan should be / has been ussed when doing flight/count related operations. Used in TACT queries and replies P,N
+82  :NORMALFLIGHTTACT_ID            Int64
+83  :PROPFLIGHTTACT_ID              Int64
+84  :OPERATINGACOPERICAOID          String
+85  :REROUTINGWHY                   String  N/M/C/A/O
+86  :REROUTINGLFIGHTSTATE           String  P/E/T/R/V/N
+87  :RVR                            Int64
+88  :FTFMAIRAC                      Int64   Filed traffic flight model (TFM=Profile) airac..
+89  :FTFMENVBASELINENUM             Int64   Filed traffic flight model (TFM=Profile) env..
+90  :RTFMAIRAC                      Int64   Regulated traffic flight model (TFM=Profile) airac..
+91  :RTFMENVBASELINENUM             Int64   Regulated traffic flight model (TFM=Profile) env..
+92  :CTFMAIRAC                      Int64   Computer traffic flight model (TFM=Profile) airac..
+93  :CTFMENVBASELINENUM             Int64   Computer traffic flight model (TFM=Profile) env..
+94  :LASTRECEIVEDPROGRESSMESSAGE    String  DPI, EMPTY, SIZE
 """
 module Exp2
 
