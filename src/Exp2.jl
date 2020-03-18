@@ -214,12 +214,7 @@ function reformat_allft!(df)
     select!(df, Not(:TEMP))
 end
 
-function reformat!(df)
-    #Date conversion
-    reformat_exp!(df)
-    reformat_flf!(df)
-    reformat_allft!(df)
-
+function remove_unused!(df)
     select!(df,[:ADEP, :ADES, :ACTYPE, :RFL, :ZONE_ORIG, :ZONE_DEST,
     :FLIGHT_ID, :ETD_DATETIME, :ETA_DATETIME, :CALLSIGN, :COMPANY, :UUID,
     :FIPS_CLONED, :FLIGHT_SAAM_ID, :FLIGHT_SAMAD_ID, :TACT_ID, :SSR_CODE,
@@ -241,6 +236,13 @@ function reformat!(df)
     :REROUTINGLFIGHTSTATE, :RVR, :FTFMAIRAC, :FTFMENVBASELINENUM, :RTFMAIRAC,
     :RTFMENVBASELINENUM, :CTFMAIRAC, :CTFMENVBASELINENUM,
     :LASTRECEIVEDPROGRESSMESSAGE])
+end
+
+function reformat!(df)
+    reformat_exp!(df)
+    reformat_flf!(df)
+    reformat_allft!(df)
+    remove_unused!(df)
 end
 
 

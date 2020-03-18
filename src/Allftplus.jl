@@ -12,6 +12,7 @@ module Allftplus
 
 export read
 
+include("utility.jl")
 using Format
 using CSV
 using Dates
@@ -48,13 +49,13 @@ const fileformat = Dict(1=>String, 2=>String, 3=>String, 4=>String, 5=>String,
 169=>String, 170=>String, 171=>String, 172=>String, 173=>String, 174=>String,
 175=>String, 176=>String, 177=>String, 178=>String, 179=>String, 180=>String)
 
-const header_format = ["0departureAerodromeIcaoId", "1arrivalAerodromeIcaoId",
-"2aircraftId", "3aircraftOperatorIcaoId", "4aircraftTypeIcaoId", "5aobt",
-"6ifpsId", "7iobt", "8originalFlightDataQuality", "9flightDataQuality",
-"10source", "11exemptionReasonType", "12exemptionReasonDistance", "13lateFiler",
-"14lateUpdater", "15northAtlanticFlight", "16cobt", "17eobt", "18lobt",
-"19flightState", "20previousToActivationFlightState", "21suspensionStatus",
-"22tactId", "23samCtot", "24samSent", "25sipCtot", "26sipSent", "27slotForced",
+const header_format = ["departureAerodromeIcaoId_0", "arrivalAerodromeIcaoId_1",
+"aircraftId_2", "aircraftOperatorIcaoId_3", "aircraftTypeIcaoId_4", "aobt_5",
+"ifpsId_6", "iobt_7", "originalFlightDataQuality_8", "flightDataQuality_9",
+"source_10", "exemptionReasonType_11", "exemptionReasonDistance_12", "lateFiler_13",
+"lateUpdater_14", "northAtlanticFlight_15", "cobt_16", "eobt_17", "lobt_18",
+"flightState_19", "previousToActivationFlightState_20", "suspensionStatus_21",
+"tactId_22", "samCtot_23", "samSent_24", "sipCtot_24", "26sipSent", "27slotForced",
 "28mostPenalizingRegulationId", "29regulationsAffectedByNrOfInstances",
 "30excludedFromNrOfInstances", "31lastReceivedAtfmMessageTitle",
 "32lastReceivedMessageTitle", "33lastSentAtfmMessageTitle",
@@ -136,13 +137,48 @@ const year2000 = Year(2000)
 function read(file)
     df = CSV.read(file, delim=";", types=fileformat, header=header_format,
     copycols=true, datarow=2)
-    remove_unused!(df)
-    # reformat!(df);
+    # remove_unused!(df)
+    reformat!(df)
     return df
 end
 
 function reformat!(df)
     #Date conversion
+    df[:,:TEMP] = format_datetime.(df[:,:aobt_5], yyyymmddhhmmss)
+    select!(df, Not(:aobt_5))
+    df[:,:aobt_5] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:iobt_7], yyyymmddhhmmss)
+    select!(df, Not(:iobt_7))
+    df[:,:iobt_7] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cobt_16], yyyymmddhhmmss)
+    select!(df, Not(:cobt_16))
+    df[:,:cobt_16] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:eobt_17], yyyymmddhhmmss)
+    select!(df, Not(:eobt_17))
+    df[:,:eobt_17] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:lobt_18], yyyymmddhhmmss)
+    select!(df, Not(:lobt_18))
+    df[:,:lobt_18] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:samCtot_23], yyyymmddhhmmss)
+    select!(df, Not(:samCtot_23))
+    df[:,:samCtot_23] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:sipCtot_24], yyyymmddhhmmss)
+    select!(df, Not(:sipCtot_24))
+    df[:,:sipCtot_24] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
     # df[:,:TIMEBEGINSEGMENT] = format_time.(df[:,:TIMEBEGINSEGMENT], hhmmss)
     # df[:,:TIMEENDSEGMENT] = format_time.(df[:,:TIMEENDSEGMENT], hhmmss)
     # df[:,:DATEBEGINSEGMENT] = format_date.(df[:,:DATEBEGINSEGMENT], yymmdd,
@@ -156,39 +192,39 @@ function reformat!(df)
     # df[:,:SEGMENT_LENGTH_M] = df[:,:SEGMENT_LENGTH_M] * 1852.0
 end
 
-function remove_unused!(df)
-    DataFrames.select!(df, [1,2,3,4,23,
-    79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
-    93, 94, 95, 96, 97, 98, 99, 100, 101, 102,
-    107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
-    165])
-end
+# function remove_unused!(df)
+#     DataFrames.select!(df, [1,2,3,4,23,
+#     79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
+#     93, 94, 95, 96, 97, 98, 99, 100, 101, 102,
+#     107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
+#     165])
+# end
 
 function latlonformat(latlon)
 
 end
 
-function pointdata(pointdata)
-    for i, element in split(pointdata)
-        if i == 1
-            dt = format_datetime(element, yyyymmddhhmmss)
-        elseif i == 2
-            geopoint = element
-        elseif i == 4
-            fl = Int64(element)
-        elseif i == 7
-            pt = Point()
-        end
-    end
-    return PointProfile(dt, geopoint, fl, pt)
-end
-
-function pointprofile(profile)
-    pp = PointProfile[]
-    for pointdata in split(profile, " ")
-        pd = pointdata(pointdata)
-        push!(pp, PointProfile())
-    end
-end
+# function pointdata(pointdata)
+#     for i, element in split(pointdata)
+#         if i == 1
+#             dt = format_datetime(element, yyyymmddhhmmss)
+#         elseif i == 2
+#             geopoint = element
+#         elseif i == 4
+#             fl = Int64(element)
+#         elseif i == 7
+#             pt = Point()
+#         end
+#     end
+#     return PointProfile(dt, geopoint, fl, pt)
+# end
+#
+# function pointprofile(profile)
+#     pp = PointProfile[]
+#     for pointdata in split(profile, " ")
+#         pd = pointdata(pointdata)
+#         push!(pp, PointProfile())
+#     end
+# end
 
 end # module
