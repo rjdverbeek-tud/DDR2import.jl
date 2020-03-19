@@ -1,5 +1,6 @@
-#TODO Finish All_FT+
-#TODO Create tester for ALL_FT+
+#TODO ftfmEetFirList_73
+#TODO ftfmEetPtList_75
+#TODO ftfmReqFlightlevelSpeedList_81
 
 """
 ALL_FT+ fileformat
@@ -22,15 +23,15 @@ const fileformat = Dict(1=>String, 2=>String, 3=>String, 4=>String, 5=>String,
 6=>String, 7=>String, 8=>String, 9=>String, 10=>String, 11=>String, 12=>String,
 13=>String, 14=>String, 15=>String, 16=>String, 17=>String, 18=>String,
 19=>String, 20=>String, 21=>String, 22=>String, 23=>Int64, 24=>String,
-25=>String, 26=>String, 27=>String, 28=>String, 29=>String, 30=>String,
-31=>String, 32=>String, 33=>String, 34=>String, 35=>String, 36=>String,
-37=>String, 38=>String, 39=>String, 40=>String, 41=>String, 42=>String,
+25=>String, 26=>String, 27=>String, 28=>String, 29=>String, 30=>Int64,
+31=>Int64, 32=>String, 33=>String, 34=>String, 35=>String, 36=>String,
+37=>String, 38=>String, 39=>Int64, 40=>Int64, 41=>Int64, 42=>String,
 43=>String, 44=>String, 45=>String, 46=>String, 47=>String, 48=>String,
-49=>String, 50=>String, 51=>String, 52=>String, 53=>String, 54=>String,
-55=>String, 56=>String, 57=>String, 58=>String, 59=>String, 60=>String,
+49=>String, 50=>String, 51=>String, 52=>Int64, 53=>Int64, 54=>Int64,
+55=>Int64, 56=>String, 57=>String, 58=>String, 59=>String, 60=>String,
 61=>String, 62=>String, 63=>String, 64=>String, 65=>String, 66=>String,
-67=>String, 68=>String, 69=>String, 70=>String, 71=>String, 72=>String,
-73=>String, 74=>String, 75=>String, 76=>String, 77=>String, 78=>String,
+67=>String, 68=>Int64, 69=>String, 70=>String, 71=>String, 72=>String,
+73=>Int64, 74=>String, 75=>Int64, 76=>String, 77=>Int64, 78=>Int64,
 79=>String, 80=>String, 81=>Int64, 82=>String, 83=>Int64, 84=>Int64,
 85=>String, 86=>String, 87=>Int64, 88=>String, 89=>String, 90=>String,
 91=>String, 92=>String, 93=>String, 94=>String, 95=>Int64, 96=>String,
@@ -55,26 +56,26 @@ const header_format = ["departureAerodromeIcaoId_0", "arrivalAerodromeIcaoId_1",
 "source_10", "exemptionReasonType_11", "exemptionReasonDistance_12", "lateFiler_13",
 "lateUpdater_14", "northAtlanticFlight_15", "cobt_16", "eobt_17", "lobt_18",
 "flightState_19", "previousToActivationFlightState_20", "suspensionStatus_21",
-"tactId_22", "samCtot_23", "samSent_24", "sipCtot_24", "26sipSent", "27slotForced",
-"28mostPenalizingRegulationId", "29regulationsAffectedByNrOfInstances",
-"30excludedFromNrOfInstances", "31lastReceivedAtfmMessageTitle",
-"32lastReceivedMessageTitle", "33lastSentAtfmMessageTitle",
-"34manualExemptionReason", "35sensitiveFlight", "36readyForImprovement",
-"37readyToDepart", "38revisedTaxiTime", "39tis", "40trs",
-"41toBeSentSlotMessageTitle", "42toBeSentProposalMessageTitle",
-"43lastSentSlotMessageTitle", "44lastSentProposalMessageTitle",
-"45lastSentSlotMessage", "46lastSentProposalMessage", "47flightCountOption",
-"48normalFlightTactId", "49proposalFlightTactId",
-"50operatingAircraftOperatorIcaoId", "51reroutingWhy", "52reroutedFlightState",
-"53runwayVisualRange", "54numberIgnoredErrors", "55arcAddrSource", "56arcAddr",
-"57ifpsRegistrationMark", "58flightType", "59aircraftEquipment", "60cdmStatus",
-"61cdmEarlyTtot", "62cdmAoTtot", "63cdmAtcTtot", "64cdmSequencedTtot",
-"65cdmTaxiTime", "66cdmOffBlockTimeDiscrepancy", "67cdmDepartureProcedureId",
-"68cdmAircraftTypeId", "69cdmRegistrationMark", "70cdmNoSlotBefore",
-"71cdmDepartureStatus", "72ftfmEetFirNrOfInstances", "73ftfmEetFirList",
-"74ftfmEetPtNrOfInstances", "75ftfmEetPtList", "76ftfmAiracCycleReleaseNumber",
-"77ftfmEnvBaselineNumber", "78ftfmDepartureRunway", "79ftfmArrivalRunway",
-"80ftfmReqFlightlevelSpeedNrOfInstances", "81ftfmReqFlightlevelSpeedList",
+"tactId_22", "samCtot_23", "samSent_24", "sipCtot_25", "sipSent_26", "slotForced_27",
+"mostPenalizingRegulationId_28", "regulationsAffectedByNrOfInstances_29",
+"excludedFromNrOfInstances_30", "lastReceivedAtfmMessageTitle_31",
+"lastReceivedMessageTitle_32", "lastSentAtfmMessageTitle_33",
+"manualExemptionReason_34", "sensitiveFlight_35", "readyForImprovement_36",
+"readyToDepart_37", "revisedTaxiTime_38", "tis_39", "trs_40",
+"toBeSentSlotMessageTitle_41", "toBeSentProposalMessageTitle_42",
+"lastSentSlotMessageTitle_43", "lastSentProposalMessageTitle_44",
+"lastSentSlotMessage_45", "lastSentProposalMessage_46", "flightCountOption_47",
+"normalFlightTactId_48", "proposalFlightTactId_49",
+"operatingAircraftOperatorIcaoId_50", "reroutingWhy_51", "reroutedFlightState_52",
+"runwayVisualRange_53", "numberIgnoredErrors_54", "arcAddrSource_55", "arcAddr_56",
+"ifpsRegistrationMark_57", "flightType_58", "aircraftEquipment_59", "cdmStatus_60",
+"cdmEarlyTtot_61", "cdmAoTtot_62", "cdmAtcTtot_63", "cdmSequencedTtot_64",
+"cdmTaxiTime_65", "cdmOffBlockTimeDiscrepancy_66", "cdmDepartureProcedureId_67",
+"cdmAircraftTypeId_68", "cdmRegistrationMark_69", "cdmNoSlotBefore_70",
+"cdmDepartureStatus_71", "ftfmEetFirNrOfInstances_72", "ftfmEetFirList_73",
+"ftfmEetPtNrOfInstances_74", "ftfmEetPtList_75", "ftfmAiracCycleReleaseNumber_76",
+"ftfmEnvBaselineNumber_77", "ftfmDepartureRunway_78", "ftfmArrivalRunway_79",
+"ftfmReqFlightlevelSpeedNrOfInstances_80", "ftfmReqFlightlevelSpeedList_81",
 "82ftfmConsumedFuel", "83ftfmRouteCharges", "84ftfmAllFtPointNrOfInstances",
 "85ftfmAllFtPointProfile", "86ftfmAllFtAirspaceNrOfInstances",
 "87ftfmAllFtAirspaceProfile", "88ftfmAllFtCircleIntersectionsNrOfInstances",
@@ -131,6 +132,7 @@ end
 
 const yymmdd = DateFormat("YYmmdd")
 const hhmmss = DateFormat("HHMMSS")
+const mmmmss = DateFormat("MMMMSS")
 const yyyymmddhhmmss = DateFormat("YYYYmmddHHMMSS")
 const year2000 = Year(2000)
 
@@ -174,11 +176,50 @@ function reformat!(df)
     df[:,:samCtot_23] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
 
-    df[:,:TEMP] = format_datetime.(df[:,:sipCtot_24], yyyymmddhhmmss)
-    select!(df, Not(:sipCtot_24))
-    df[:,:sipCtot_24] =  df[:,:TEMP]
+    df[:,:TEMP] = format_datetime.(df[:,:sipCtot_25], yyyymmddhhmmss)
+    select!(df, Not(:sipCtot_25))
+    df[:,:sipCtot_25] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
 
+    df[:,:TEMP] = format_datetime.(df[:,:lastSentSlotMessage_45], yyyymmddhhmmss)
+    select!(df, Not(:lastSentSlotMessage_45))
+    df[:,:lastSentSlotMessage_45] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:lastSentProposalMessage_46], yyyymmddhhmmss)
+    select!(df, Not(:lastSentProposalMessage_46))
+    df[:,:lastSentProposalMessage_46] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmEarlyTtot_61], yyyymmddhhmmss)
+    select!(df, Not(:cdmEarlyTtot_61))
+    df[:,:cdmEarlyTtot_61] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmAoTtot_62], yyyymmddhhmmss)
+    select!(df, Not(:cdmAoTtot_62))
+    df[:,:cdmAoTtot_62] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmAtcTtot_63], yyyymmddhhmmss)
+    select!(df, Not(:cdmAtcTtot_63))
+    df[:,:cdmAtcTtot_63] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmSequencedTtot_64], yyyymmddhhmmss)
+    select!(df, Not(:cdmSequencedTtot_64))
+    df[:,:cdmSequencedTtot_64] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmTaxiTime_65], mmmmss)
+    select!(df, Not(:cdmTaxiTime_65))
+    df[:,:cdmTaxiTime_65] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:cdmNoSlotBefore_70], yyyymmddhhmmss)
+    select!(df, Not(:cdmNoSlotBefore_70))
+    df[:,:cdmNoSlotBefore_70] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
     # df[:,:TIMEBEGINSEGMENT] = format_time.(df[:,:TIMEBEGINSEGMENT], hhmmss)
     # df[:,:TIMEENDSEGMENT] = format_time.(df[:,:TIMEENDSEGMENT], hhmmss)
     # df[:,:DATEBEGINSEGMENT] = format_date.(df[:,:DATEBEGINSEGMENT], yymmdd,

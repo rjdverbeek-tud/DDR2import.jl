@@ -33,6 +33,62 @@ using Dates
     @test df[2,:tactId_22] == 512256
     @test Dates.year(df[2,:samCtot_23]) == 2017
     @test df[2,:samSent_24] === missing
-    @test Dates.day(df[2,:sipCtot_24]) == 15
-    # @test df[2,:aircraftTypeIcaoId_4] == "E145"
+    @test Dates.day(df[2,:sipCtot_25]) == 15
+    @test df[2,:sipSent_26] === missing
+    @test df[2,:slotForced_27] === missing
+    @test df[2,:mostPenalizingRegulationId_28] == "EHAMA15M"
+    @test df[2,:regulationsAffectedByNrOfInstances_29] == 0
+    @test df[2,:excludedFromNrOfInstances_30] == 0
+    @test df[2,:lastReceivedAtfmMessageTitle_31] === missing
+    @test df[2,:lastReceivedMessageTitle_32] === missing
+    @test df[2,:lastSentAtfmMessageTitle_33] === missing
+    @test df[2,:manualExemptionReason_34] == "N"
+    @test df[2,:sensitiveFlight_35] === missing
+    @test df[2,:readyForImprovement_36] === missing
+    @test df[2,:readyToDepart_37] === missing
+    @test df[2,:revisedTaxiTime_38] == 0
+    @test df[2,:tis_39] == 0
+    @test df[2,:trs_40] == 0
+    @test df[2,:toBeSentSlotMessageTitle_41] === missing
+    @test df[2,:toBeSentProposalMessageTitle_42] === missing
+    @test df[2,:lastSentSlotMessageTitle_43] === missing
+    @test df[2,:lastSentProposalMessageTitle_44] === missing
+    @test Dates.year(df[2,:lastSentSlotMessage_45]) == 2017
+    @test Dates.day(df[2,:lastSentSlotMessage_45]) == 15
+    @test Dates.month(df[2,:lastSentProposalMessage_46]) == 12
+    @test df[2,:flightCountOption_47] == "N"
+    @test df[2,:normalFlightTactId_48] === missing
+    @test df[2,:proposalFlightTactId_49] === missing
+    @test df[2,:operatingAircraftOperatorIcaoId_50] === missing
+    @test df[2,:reroutingWhy_51] === missing
+    @test df[2,:reroutedFlightState_52] === missing
+    @test df[2,:runwayVisualRange_53] == 0
+    @test df[2,:numberIgnoredErrors_54] === missing
+    @test df[2,:arcAddrSource_55] === missing
+    @test df[2,:arcAddr_56] === missing
+    @test df[2,:ifpsRegistrationMark_57] === missing
+    @test df[2,:flightType_58] === missing
+    @test df[2,:aircraftEquipment_59] === missing
+    @test df[2,:cdmStatus_60] === missing
+    @test df[2,:cdmEarlyTtot_61] === missing
+    @test df[2,:cdmAoTtot_62] === missing
+    @test df[2,:cdmAtcTtot_63] === missing
+    @test df[2,:cdmSequencedTtot_64] === missing
+    @test df[2,:cdmTaxiTime_65] === missing
+    @test df[2,:cdmOffBlockTimeDiscrepancy_66] === missing
+    @test df[2,:cdmDepartureProcedureId_67] === missing
+    @test df[2,:cdmAircraftTypeId_68] === missing
+    @test df[2,:cdmRegistrationMark_69] === missing
+    @test df[2,:cdmNoSlotBefore_70] === missing
+    @test df[2,:cdmDepartureStatus_71] === missing
+    @test df[2,:ftfmEetFirNrOfInstances_72] === missing
+    #@test df[2,:ftfmEetFirList_73] === missing
+    @test df[2,:ftfmEetPtNrOfInstances_74] === missing
+    #@test df[2,:ftfmEetPtList_75] === missing
+    @test df[2,:ftfmAiracCycleReleaseNumber_76] === missing
+    @test df[2,:ftfmEnvBaselineNumber_77] === missing
+    @test df[2,:ftfmDepartureRunway_78] === missing
+    @test df[2,:ftfmArrivalRunway_79] === missing
+    @test df[2,:ftfmReqFlightlevelSpeedNrOfInstances_80] == 1
+    #@test df[2,:ftfmReqFlightlevelSpeedList_81]
 end
