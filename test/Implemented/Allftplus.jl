@@ -91,4 +91,112 @@ using Dates
     @test df[2,:ftfmArrivalRunway_79] === missing
     @test df[2,:ftfmReqFlightlevelSpeedNrOfInstances_80] == 1
     #@test df[2,:ftfmReqFlightlevelSpeedList_81]
+    @test df[2,:ftfmConsumedFuel_82] === missing
+    @test df[2,:ftfmRouteCharges_83] === missing
+    @test df[2,:ftfmAllFtPointNrOfInstances_84] === missing
+    #@test df[2,:ftfmAllFtPointProfile_85]
+    @test df[2,:ftfmAllFtAirspaceNrOfInstances_86] === missing
+    #@test df[2,:ftfmAllFtAirspaceProfile_87]
+    @test df[2,:ftfmAllFtCircleIntersectionsNrOfInstances_88] === missing
+    #@test df[2,:ftfmAllFtCircleIntersections_89]
+    @test df[2,:rtfmAiracCycleReleaseNumber_90] === missing
+    @test df[2,:rtfmEnvBaselineNumber_91] === missing
+    @test df[2,:rtfmDepartureRunway_92] === missing
+    @test df[2,:rtfmArrivalRunway_93] === missing
+    @test df[2,:rtfmReqFlightlevelSpeedNrOfInstances_94] === missing
+    #@test df[2,:rtfmReqFlightlevelSpeedList_95]
+    @test df[2,:rtfmConsumedFuel_96] === missing
+    @test df[2,:rtfmRouteCharges_97] === missing
+    @test df[2,:rtfmAllFtPointNrOfInstances_98] === missing
+    #@test df[2,:rtfmAllFtPointProfile_99]
+    @test df[2,:rtfmAllFtAirspaceNrOfInstances_100] === missing
+    #@test df[2,:rtfmAllFtAirspaceProfile_101]
+    @test df[2,:rtfmAllFtCircleIntersectionsNrOfInstances_102] === missing
+    #@test df[2,:rtfmAllFtCircleIntersections_103]
+    @test df[2,:ctfmAiracCycleReleaseNumber_104] === missing
+    @test df[2,:ctfmEnvBaselineNumber_105] === missing
+    @test df[2,:ctfmDepartureRunway_106] === missing
+    @test df[2,:ctfmArrivalRunway_107] === missing
+    @test df[2,:ctfmReqFlightlevelSpeedNrOfInstances_108] == 1
+    #@test df[2,:ctfmReqFlightlevelSpeedList_109]
+    @test df[2,:ctfmConsumedFuel_110] === missing
+    @test df[2,:ctfmRouteCharges_111] === missing
+    @test df[2,:ctfmAllFtPointNrOfInstances_112] === missing
+    #@test df[2,:ctfmAllFtPointProfile_113]
+    @test df[2,:ctfmAllFtAirspaceNrOfInstances_114] === missing
+    #@test df[2,:ctfmAllFtAirspaceProfile_115]
+    @test df[2,:ctfmAllFtCircleIntersectionsNrOfInstances_116] === missing
+    #@test df[2,:ctfmAllFtCircleIntersections_117]
+    @test df[2,:noCPGCPFReason_118] === missing
+    @test df[2,:scrObt_119] === missing
+    @test df[2,:scrConsumedFuel_120] === missing
+    @test df[2,:scrRouteCharges_121] === missing
+    @test df[2,:scrAllFtPointNrOfInstances_122] === missing
+    #@test df[2,:scrAllFtPointProfile_123]
+    @test df[2,:scrAllFtAirspaceNrOfInstances_124] === missing
+    #@test df[2,:scrAllFtAirspaceProfile_125]
+    @test df[2,:scrAllFtCircleIntersectionsNrOfInstances_126] === missing
+    #@test df[2,:scrAllFtCircleIntersections_127]
+    @test df[2,:srrObt_128] === missing
+    @test df[2,:srrConsumedFuel_129] === missing
+    @test df[2,:srrRouteCharges_130] === missing
+    @test df[2,:srrAllFtPointNrOfInstances_131] === missing
+    #@test df[2,:srrAllFtPointProfile_132]
+    @test df[2,:srrAllFtAirspaceNrOfInstances_133] === missing
+    #@test df[2,:srrAllFtAirspaceProfile_134]
+    @test df[2,:srrAllFtCircleIntersectionsNrOfInstances_135] === missing
+    #@test df[2,:srrAllFtCircleIntersections_136]
+    @test df[2,:surObt_137] === missing
+    @test df[2,:surConsumedFuel_138] === missing
+    @test df[2,:surRouteCharges_139] === missing
+    @test df[2,:surAllFtPointNrOfInstances_140] === missing
+    #@test df[2,:surAllFtPointProfile_141]
+    @test df[2,:surAllFtAirspaceNrOfInstances_142] === missing
+    #@test df[2,:surAllFtAirspaceProfile_143]
+    @test df[2,:surAllFtCircleIntersectionsNrOfInstances_144] === missing
+    #@test df[2,:surAllFtCircleIntersections_145]
+    @test df[2,:dctObt_146] === missing
+    @test df[2,:dctConsumedFuel_147] === missing
+    @test df[2,:dctRouteCharges_148] === missing
+    @test df[2,:dctAllFtPointNrOfInstances_149] === missing
+    #@test df[2,:dctAllFtPointProfile_150]
+    @test df[2,:dctAllFtAirspaceNrOfInstances_151] === missing
+    #@test df[2,:dctAllFtAirspaceProfile_152]
+    @test df[2,:dctAllFtCircleIntersectionsNrOfInstances_153] === missing
+    #@test df[2,:dctAllFtCircleIntersections_154]
+    @test df[2,:dctObt_146] === missing
+    @test df[2,:dctConsumedFuel_147] === missing
+    @test df[2,:dctRouteCharges_148] === missing
+    @test df[2,:dctAllFtPointNrOfInstances_149] === missing
+    #@test df[2,:dctAllFtPointProfile_150]
+    @test df[2,:dctAllFtAirspaceNrOfInstances_151] === missing
+    #@test df[2,:dctAllFtAirspaceProfile_152]
+    @test df[2,:dctAllFtCircleIntersectionsNrOfInstances_153] === missing
+    #@test df[2,:dctAllFtCircleIntersections_154]
+    @test df[2,:cpfObt_155] === missing
+    @test df[2,:cpfConsumedFuel_156] === missing
+    @test df[2,:cpfRouteCharges_157] === missing
+    @test df[2,:cpfAllFtPointNrOfInstances_158] === missing
+    #@test df[2,:cpfAllFtPointProfile_159]
+    @test df[2,:cpfAllFtAirspaceNrOfInstances_160] === missing
+    #@test df[2,:cpfAllFtAirspaceProfile_161]
+    @test df[2,:cpfAllFtCircleIntersectionsNrOfInstances_162] === missing
+    #@test df[2,:cpfAllFtCircleIntersections_163]
+    @test df[2,:aircraftidIATA_164] === missing
+    @test df[2,:intentionFlight_165] === missing
+    @test df[2,:intentionRelatedRouteAssignmentMethod_166] === missing
+    @test df[2,:intentionUID_167] === missing
+    @test df[2,:intentionEditionDate_168] === missing
+    @test df[2,:intentionSource_169] === missing
+    @test df[2,:associatedIntentions_170] === missing
+    @test df[2,:enrichmentOutput_171] === missing
+    @test df[2,:eventID_172] === missing
+    @test df[2,:eventTime_173] === missing
+    @test df[2,:flightVersionNr_174] === missing
+    @test df[2,:ftfmNrTvProfiles_175] === missing
+    # @test df[2,:ftfmTvProfile_176] === missing
+    @test df[2,:rtfmNrTvProfiles_177] === missing
+    # @test df[2,:rtfmTvProfile_178] === missing
+    @test df[2,:ctfmNrTvProfiles_179] === missing
+    # @test df[2,:ctfmTvProfile_180] === missing
 end
