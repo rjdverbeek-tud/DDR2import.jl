@@ -27,10 +27,10 @@ const fileformat = Dict(1=>String, 2=>String, 3=>String, 4=>String, 5=>String,
 31=>Int64, 32=>String, 33=>String, 34=>String, 35=>String, 36=>String,
 37=>String, 38=>String, 39=>Int64, 40=>Int64, 41=>Int64, 42=>String,
 43=>String, 44=>String, 45=>String, 46=>String, 47=>String, 48=>String,
-49=>String, 50=>String, 51=>String, 52=>Int64, 53=>Int64, 54=>Int64,
+49=>Int64, 50=>Int64, 51=>String, 52=>String, 53=>String, 54=>Int64,
 55=>Int64, 56=>String, 57=>String, 58=>String, 59=>String, 60=>String,
 61=>String, 62=>String, 63=>String, 64=>String, 65=>String, 66=>String,
-67=>String, 68=>Int64, 69=>String, 70=>String, 71=>String, 72=>String,
+67=>String, 68=>String, 69=>String, 70=>String, 71=>String, 72=>String,
 73=>Int64, 74=>String, 75=>Int64, 76=>String, 77=>Int64, 78=>Int64,
 79=>String, 80=>String, 81=>Int64, 82=>String, 83=>Float64, 84=>Float64,
 85=>Int64, 86=>String, 87=>Int64, 88=>String, 89=>Int64, 90=>String,
@@ -127,7 +127,9 @@ end
 struct PointProfile
     datetime::DateTime
     geoPointId::String
-    FL::Int64
+    pointType::Union{String, Missing}
+    FL::Union{Int64, Missing}
+    Distance_NM::Union{Int64, Missing}
     Position::Point
 end
 
@@ -226,6 +228,22 @@ function reformat!(df)
     select!(df, Not(:scrObt_119))
     df[:,:scrObt_119] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:srrObt_128], yyyymmddhhmmss)
+    select!(df, Not(:srrObt_128))
+    df[:,:srrObt_128] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:surObt_137], yyyymmddhhmmss)
+    select!(df, Not(:surObt_137))
+    df[:,:surObt_137] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:eventTime_173], yyyymmddhhmmss)
+    select!(df, Not(:eventTime_173))
+    df[:,:eventTime_173] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
     # df[:,:TIMEBEGINSEGMENT] = format_time.(df[:,:TIMEBEGINSEGMENT], hhmmss)
     # df[:,:TIMEENDSEGMENT] = format_time.(df[:,:TIMEENDSEGMENT], hhmmss)
     # df[:,:DATEBEGINSEGMENT] = format_date.(df[:,:DATEBEGINSEGMENT], yymmdd,
