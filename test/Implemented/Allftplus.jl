@@ -53,7 +53,7 @@ using Dates
     @test df[2,:trs_40] == 0
     @test df[2,:toBeSentSlotMessageTitle_41] === missing
     @test df[2,:toBeSentProposalMessageTitle_42] === missing
-    @test df[2,:lastSentSlotMessageTitle_43] === missing
+    @test df2[3,:lastSentSlotMessageTitle_43] === "SRM"
     @test df[2,:lastSentProposalMessageTitle_44] === missing
     @test Dates.year(df[2,:lastSentSlotMessage_45]) == 2017
     @test Dates.day(df[2,:lastSentSlotMessage_45]) == 15
@@ -67,21 +67,21 @@ using Dates
     @test df[2,:runwayVisualRange_53] == 0
     @test df2[2,:numberIgnoredErrors_54] == 0
     @test df2[2,:arcAddrSource_55] == "N"
-    @test df[2,:arcAddr_56] === missing
+    @test df2[1,:arcAddr_56] == "A9F2C6"
     @test df2[2,:ifpsRegistrationMark_57] == "ECMIF"
     @test df2[2,:flightType_58] == "S"
     @test df2[2,:aircraftEquipment_59] == "DFGRSY:B2B3B4:EB1"
     @test df2[2,:cdmStatus_60] == "N"
-    @test df[2,:cdmEarlyTtot_61] === missing
-    @test df[2,:cdmAoTtot_62] === missing
-    @test df[2,:cdmAtcTtot_63] === missing
-    @test df[2,:cdmSequencedTtot_64] === missing
-    @test df[2,:cdmTaxiTime_65] === missing
+    @test Dates.minute(df2[1,:cdmEarlyTtot_61]) == 8
+    @test Dates.hour(df2[1,:cdmAoTtot_62]) == 21
+    @test Dates.day(df2[1,:cdmAtcTtot_63]) == 2
+    @test Dates.month(df2[1,:cdmSequencedTtot_64]) == 1
+    @test Dates.minute(df2[1,:cdmTaxiTime_65]) == 21
     @test df2[2,:cdmOffBlockTimeDiscrepancy_66] == "N"
-    @test df[2,:cdmDepartureProcedureId_67] === missing
-    @test df[2,:cdmAircraftTypeId_68] === missing
-    @test df[2,:cdmRegistrationMark_69] === missing
-    @test df[2,:cdmNoSlotBefore_70] === missing
+    @test df2[1,:cdmDepartureProcedureId_67] == "DENUT6C"
+    @test df2[1,:cdmAircraftTypeId_68] == "B744"
+    @test df2[1,:cdmRegistrationMark_69] == "N740CK"
+    @test Dates.minute(df2[1,:cdmNoSlotBefore_70]) == 9
     @test df2[2,:cdmDepartureStatus_71] == "K"
     @test df2[2,:ftfmEetFirNrOfInstances_72] == 0
     #@test df[2,:ftfmEetFirList_73] === missing
@@ -97,25 +97,25 @@ using Dates
     @test df2[2,:ftfmRouteCharges_83] == 49.0
     @test df2[2,:ftfmAllFtPointNrOfInstances_84] == 16
     #@test df[2,:ftfmAllFtPointProfile_85]
-    @test df[2,:ftfmAllFtAirspaceNrOfInstances_86] === missing
+    @test df2[2,:ftfmAllFtAirspaceNrOfInstances_86] == 10
     #@test df[2,:ftfmAllFtAirspaceProfile_87]
-    @test df[2,:ftfmAllFtCircleIntersectionsNrOfInstances_88] === missing
+    @test df2[2,:ftfmAllFtCircleIntersectionsNrOfInstances_88] == 2
     #@test df[2,:ftfmAllFtCircleIntersections_89]
-    @test df[2,:rtfmAiracCycleReleaseNumber_90] === missing
-    @test df[2,:rtfmEnvBaselineNumber_91] === missing
-    @test df[2,:rtfmDepartureRunway_92] === missing
-    @test df[2,:rtfmArrivalRunway_93] === missing
-    @test df[2,:rtfmReqFlightlevelSpeedNrOfInstances_94] === missing
+    @test df2[3,:rtfmAiracCycleReleaseNumber_90] == 447
+    @test df2[3,:rtfmEnvBaselineNumber_91] == 1498
+    @test df2[3,:rtfmDepartureRunway_92] == "EDDL23R"
+    @test df2[3,:rtfmArrivalRunway_93] == "LTAC03R"
+    @test df2[3,:rtfmReqFlightlevelSpeedNrOfInstances_94] == 3
     #@test df[2,:rtfmReqFlightlevelSpeedList_95]
-    @test df[2,:rtfmConsumedFuel_96] === missing
-    @test df[2,:rtfmRouteCharges_97] === missing
-    @test df[2,:rtfmAllFtPointNrOfInstances_98] === missing
+    @test df2[3,:rtfmConsumedFuel_96] == 7772.0
+    @test df2[3,:rtfmRouteCharges_97] == 1153.0
+    @test df2[3,:rtfmAllFtPointNrOfInstances_98] == 68
     #@test df[2,:rtfmAllFtPointProfile_99]
-    @test df[2,:rtfmAllFtAirspaceNrOfInstances_100] === missing
+    @test df2[3,:rtfmAllFtAirspaceNrOfInstances_100] == 97
     #@test df[2,:rtfmAllFtAirspaceProfile_101]
-    @test df[2,:rtfmAllFtCircleIntersectionsNrOfInstances_102] === missing
+    @test df2[3,:rtfmAllFtCircleIntersectionsNrOfInstances_102] == 4
     #@test df[2,:rtfmAllFtCircleIntersections_103]
-    @test df[2,:ctfmAiracCycleReleaseNumber_104] === missing
+    @test df2[2,:ctfmAiracCycleReleaseNumber_104] == 447
     @test df2[2,:ctfmEnvBaselineNumber_105] == 1270
     @test df2[2,:ctfmDepartureRunway_106] == "GCXO30"
     @test df2[2,:ctfmArrivalRunway_107] == "GCHI34"
@@ -125,13 +125,13 @@ using Dates
     @test df2[2,:ctfmRouteCharges_111] == 49.0
     @test df2[2,:ctfmAllFtPointNrOfInstances_112] == 28
     #@test df[2,:ctfmAllFtPointProfile_113]
-    @test df[2,:ctfmAllFtAirspaceNrOfInstances_114] === missing
+    @test df2[2,:ctfmAllFtAirspaceNrOfInstances_114] == 8
     #@test df[2,:ctfmAllFtAirspaceProfile_115]
-    @test df[2,:ctfmAllFtCircleIntersectionsNrOfInstances_116] === missing
+    @test df2[2,:ctfmAllFtCircleIntersectionsNrOfInstances_116] == 2
     #@test df[2,:ctfmAllFtCircleIntersections_117]
-    @test df[2,:noCPGCPFReason_118] === missing
+    @test df2[5,:noCPGCPFReason_118] == "X"
     @test Dates.day(df2[2,:scrObt_119]) == 3
-    @test df[2,:scrConsumedFuel_120] === missing
+    @test df2[2,:scrConsumedFuel_120] == 322.0
     @test df2[2,:scrRouteCharges_121] === 49.0
     @test df2[2,:scrAllFtPointNrOfInstances_122] == 16
     #@test df[2,:scrAllFtPointProfile_123]
@@ -139,41 +139,32 @@ using Dates
     #@test df[2,:scrAllFtAirspaceProfile_125]
     @test df2[2,:scrAllFtCircleIntersectionsNrOfInstances_126] == 0
     #@test df[2,:scrAllFtCircleIntersections_127]
-    @test df[2,:srrObt_128] === missing
-    @test df[2,:srrConsumedFuel_129] === missing
-    @test df[2,:srrRouteCharges_130] === missing
-    @test df[2,:srrAllFtPointNrOfInstances_131] === missing
+    @test Dates.minute(df2[3,:srrObt_128]) == 15
+    @test df2[3,:srrConsumedFuel_129] == 7813.0
+    @test df2[3,:srrRouteCharges_130] == 1113.0
+    @test df2[3,:srrAllFtPointNrOfInstances_131] == 74
     #@test df[2,:srrAllFtPointProfile_132]
-    @test df[2,:srrAllFtAirspaceNrOfInstances_133] === missing
+    @test df2[3,:srrAllFtAirspaceNrOfInstances_133] == 80
     #@test df[2,:srrAllFtAirspaceProfile_134]
-    @test df[2,:srrAllFtCircleIntersectionsNrOfInstances_135] === missing
+    @test df2[3,:srrAllFtCircleIntersectionsNrOfInstances_135] == 4
     #@test df[2,:srrAllFtCircleIntersections_136]
-    @test df[2,:surObt_137] === missing
+    @test Dates.minute(df2[2,:surObt_137]) == 54
     @test df2[2,:surConsumedFuel_138] == 343.0
     @test df2[2,:surRouteCharges_139] == 49.0
     @test df2[2,:surAllFtPointNrOfInstances_140] == 28
     #@test df[2,:surAllFtPointProfile_141]
-    @test df[2,:surAllFtAirspaceNrOfInstances_142] === missing
+    @test df2[2,:surAllFtAirspaceNrOfInstances_142] == 8
     #@test df[2,:surAllFtAirspaceProfile_143]
-    @test df[2,:surAllFtCircleIntersectionsNrOfInstances_144] === missing
+    @test df2[3,:surAllFtCircleIntersectionsNrOfInstances_144] == 4
     #@test df[2,:surAllFtCircleIntersections_145]
-    @test df[2,:dctObt_146] === missing
-    @test df[2,:dctConsumedFuel_147] === missing
-    @test df[2,:dctRouteCharges_148] === missing
-    @test df[2,:dctAllFtPointNrOfInstances_149] === missing
+    @test Dates.minute(df2[1,:dctObt_146]) == 50
+    @test df2[1,:dctConsumedFuel_147] == 73966.0
+    @test df2[1,:dctRouteCharges_148] == 1864.0
+    @test df2[1,:dctAllFtPointNrOfInstances_149] == 40
     #@test df[2,:dctAllFtPointProfile_150]
-    @test df[2,:dctAllFtAirspaceNrOfInstances_151] === missing
+    @test df2[1,:dctAllFtAirspaceNrOfInstances_151] == 79
     #@test df[2,:dctAllFtAirspaceProfile_152]
-    @test df[2,:dctAllFtCircleIntersectionsNrOfInstances_153] === missing
-    #@test df[2,:dctAllFtCircleIntersections_154]
-    @test df[2,:dctObt_146] === missing
-    @test df[2,:dctConsumedFuel_147] === missing
-    @test df[2,:dctRouteCharges_148] === missing
-    @test df[2,:dctAllFtPointNrOfInstances_149] === missing
-    #@test df[2,:dctAllFtPointProfile_150]
-    @test df[2,:dctAllFtAirspaceNrOfInstances_151] === missing
-    #@test df[2,:dctAllFtAirspaceProfile_152]
-    @test df[2,:dctAllFtCircleIntersectionsNrOfInstances_153] === missing
+    @test df2[1,:dctAllFtCircleIntersectionsNrOfInstances_153] == 4
     #@test df[2,:dctAllFtCircleIntersections_154]
     @test df[2,:cpfObt_155] === missing
     @test df[2,:cpfConsumedFuel_156] === missing
@@ -193,7 +184,7 @@ using Dates
     @test df[2,:associatedIntentions_170] === missing
     @test df[2,:enrichmentOutput_171] === missing
     @test df2[2,:eventID_172] == "TTE"
-    @test df[2,:eventTime_173] === missing
+    @test Dates.second(df2[1,:eventTime_173]) == 44
     @test df2[2,:flightVersionNr_174] == 44
     @test df[2,:ftfmNrTvProfiles_175] === missing
     # @test df[2,:ftfmTvProfile_176] === missing

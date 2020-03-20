@@ -214,7 +214,7 @@ function reformat!(df)
     df[:,:cdmSequencedTtot_64] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
 
-    df[:,:TEMP] = format_datetime.(df[:,:cdmTaxiTime_65], mmmmss)
+    df[:,:TEMP] = format_time.(df[:,:cdmTaxiTime_65], mmmmss)
     select!(df, Not(:cdmTaxiTime_65))
     df[:,:cdmTaxiTime_65] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
@@ -237,6 +237,11 @@ function reformat!(df)
     df[:,:TEMP] = format_datetime.(df[:,:surObt_137], yyyymmddhhmmss)
     select!(df, Not(:surObt_137))
     df[:,:surObt_137] =  df[:,:TEMP]
+    select!(df, Not(:TEMP))
+
+    df[:,:TEMP] = format_datetime.(df[:,:dctObt_146], yyyymmddhhmmss)
+    select!(df, Not(:dctObt_146))
+    df[:,:dctObt_146] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
 
     df[:,:TEMP] = format_datetime.(df[:,:eventTime_173], yyyymmddhhmmss)
