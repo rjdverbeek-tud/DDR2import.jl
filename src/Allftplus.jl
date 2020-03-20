@@ -119,20 +119,6 @@ const header_format = ["departureAerodromeIcaoId_0", "arrivalAerodromeIcaoId_1",
 "ftfmNrTvProfiles_175", "ftfmTvProfile_176", "rtfmNrTvProfiles_177",
 "rtfmTvProfile_178", "ctfmNrTvProfiles_179", "ctfmTvProfile_180"]
 
-struct Point
-    lat_deg::Float64
-    lon_deg::Float64
-end
-
-struct PointProfile
-    datetime::DateTime
-    geoPointId::String
-    pointType::Union{String, Missing}
-    FL::Union{Int64, Missing}
-    Distance_NM::Union{Int64, Missing}
-    Position::Point
-end
-
 const yymmdd = DateFormat("YYmmdd")
 const hhmmss = DateFormat("HHMMSS")
 const mmmmss = DateFormat("MMMMSS")
@@ -145,6 +131,46 @@ function read(file)
     # remove_unused!(df)
     reformat!(df)
     return df
+end
+
+struct FlightlevelSpeed
+    FL::Int64
+    Spd::String
+    Value::Int64
+    function FlightlevelSpeed(x::SubString{String})
+        flspdvalue = split(x, ':')
+        FL = parse(Int64, flspdvalue[1][2:end])
+        Spd = flspdvalue[2]
+        Value = parse(Int64, flspdvalue[3])
+        new(FL, Spd, Value)
+    end
+end
+
+function reqFlightlevelSpeedList(flspdvalue::Union{String, Missing})
+    if flspdvalue === missing
+        return missing
+    else
+        return [FlightlevelSpeed(item) for item in split(flspdvalue)]
+    end
+end
+
+struct AllFtPointProfile
+    datetime::DateTime
+    point::String
+    route::String
+    FL::Int64
+    pointDistance::Int64
+    pointType::Char
+    geoPointId::String
+    ratio::Int64
+    isVisible::Char  # Y indicated IFR/GAT/IFPSTART, N indicates VFR/OAT/IFPSTOP/STAY
+    function AllFtPointProfile(x::SubString{String})
+        flspdvalue = split(x, ':')
+        FL = parse(Int64, flspdvalue[1][2:end])
+        Spd = flspdvalue[2]
+        Value = parse(Int64, flspdvalue[3])
+        new(FL, Spd, Value)
+    end
 end
 
 function reformat!(df)
@@ -249,52 +275,6 @@ function reformat!(df)
     df[:,:eventTime_173] =  df[:,:TEMP]
     select!(df, Not(:TEMP))
 
-    # df[:,:TIMEBEGINSEGMENT] = format_time.(df[:,:TIMEBEGINSEGMENT], hhmmss)
-    # df[:,:TIMEENDSEGMENT] = format_time.(df[:,:TIMEENDSEGMENT], hhmmss)
-    # df[:,:DATEBEGINSEGMENT] = format_date.(df[:,:DATEBEGINSEGMENT], yymmdd,
-    # addyear=year2000)
-    # df[:,:DATEENDSEGMENT] = format_date.(df[:,:DATEENDSEGMENT], yymmdd,
-    # addyear=year2000)
-    # df[:,:LATBEGINSEGMENT_DEG] = df[:,:LATBEGINSEGMENT_DEG] / 60.0
-    # df[:,:LONBEGINSEGMENT_DEG] = df[:,:LONBEGINSEGMENT_DEG] / 60.0
-    # df[:,:LATENDSEGMENT_DEG] = df[:,:LATENDSEGMENT_DEG] / 60.0
-    # df[:,:LONENDSEGMENT_DEG] = df[:,:LONENDSEGMENT_DEG] / 60.0
-    # df[:,:SEGMENT_LENGTH_M] = df[:,:SEGMENT_LENGTH_M] * 1852.0
 end
-
-# function remove_unused!(df)
-#     DataFrames.select!(df, [1,2,3,4,23,
-#     79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
-#     93, 94, 95, 96, 97, 98, 99, 100, 101, 102,
-#     107, 108, 109, 110, 111, 112, 113, 114, 115, 116,
-#     165])
-# end
-
-function latlonformat(latlon)
-
-end
-
-# function pointdata(pointdata)
-#     for i, element in split(pointdata)
-#         if i == 1
-#             dt = format_datetime(element, yyyymmddhhmmss)
-#         elseif i == 2
-#             geopoint = element
-#         elseif i == 4
-#             fl = Int64(element)
-#         elseif i == 7
-#             pt = Point()
-#         end
-#     end
-#     return PointProfile(dt, geopoint, fl, pt)
-# end
-#
-# function pointprofile(profile)
-#     pp = PointProfile[]
-#     for pointdata in split(profile, " ")
-#         pd = pointdata(pointdata)
-#         push!(pp, PointProfile())
-#     end
-# end
 
 end # module

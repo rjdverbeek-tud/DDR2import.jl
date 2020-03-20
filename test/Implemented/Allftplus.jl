@@ -84,15 +84,15 @@ using Dates
     @test Dates.minute(df2[1,:cdmNoSlotBefore_70]) == 9
     @test df2[2,:cdmDepartureStatus_71] == "K"
     @test df2[2,:ftfmEetFirNrOfInstances_72] == 0
-    #@test df[2,:ftfmEetFirList_73] === missing
+    @test df2[1,:ftfmEetFirList_73] == "EHAAFIR:10"
     @test df2[2,:ftfmEetPtNrOfInstances_74] == 0
-    #@test df[2,:ftfmEetPtList_75] === missing
+    @test df2[1,:ftfmEetPtList_75] == "55N020W:125 57N030W:170 58N040W:211 58N050W:251 CUDDY:281"
     @test df2[2,:ftfmAiracCycleReleaseNumber_76] == 447
     @test df2[2,:ftfmEnvBaselineNumber_77] == 842
     @test df2[2,:ftfmDepartureRunway_78] == "GCXO30"
     @test df2[2,:ftfmArrivalRunway_79] == "GCHI34"
     @test df[2,:ftfmReqFlightlevelSpeedNrOfInstances_80] == 1
-    #@test df[2,:ftfmReqFlightlevelSpeedList_81]
+    @test df2[1,:ftfmReqFlightlevelSpeedList_81] == "F320:N0487:0 F340:M084:1383 F360:M084:4022"
     @test df2[2,:ftfmConsumedFuel_82] == 322.0
     @test df2[2,:ftfmRouteCharges_83] == 49.0
     @test df2[2,:ftfmAllFtPointNrOfInstances_84] == 16
@@ -106,7 +106,7 @@ using Dates
     @test df2[3,:rtfmDepartureRunway_92] == "EDDL23R"
     @test df2[3,:rtfmArrivalRunway_93] == "LTAC03R"
     @test df2[3,:rtfmReqFlightlevelSpeedNrOfInstances_94] == 3
-    #@test df[2,:rtfmReqFlightlevelSpeedList_95]
+    @test df2[3,:rtfmReqFlightlevelSpeedList_95] == "F350:N0425:0 F370:N0439:410 F390:N0453:1497"
     @test df2[3,:rtfmConsumedFuel_96] == 7772.0
     @test df2[3,:rtfmRouteCharges_97] == 1153.0
     @test df2[3,:rtfmAllFtPointNrOfInstances_98] == 68
@@ -120,7 +120,7 @@ using Dates
     @test df2[2,:ctfmDepartureRunway_106] == "GCXO30"
     @test df2[2,:ctfmArrivalRunway_107] == "GCHI34"
     @test df[2,:ctfmReqFlightlevelSpeedNrOfInstances_108] == 1
-    #@test df[2,:ctfmReqFlightlevelSpeedList_109]
+    @test df2[1,:ctfmReqFlightlevelSpeedList_109] == "F300:N0487:0 F320:N0487:492 F320:M084:1367 F360:M084:4021"
     @test df2[2,:ctfmConsumedFuel_110] == 343.0
     @test df2[2,:ctfmRouteCharges_111] == 49.0
     @test df2[2,:ctfmAllFtPointNrOfInstances_112] == 28
