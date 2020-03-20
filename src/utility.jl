@@ -4,7 +4,13 @@
 #
 using Dates
 
-function format_date(str::Union{String, Missing}, format; addyear = Year(0))
+"Point_deg type with latitude `ϕ` [deg] and longitude `λ` [deg]"
+struct Point{T<:Float64}
+    lat::T
+    lon::T
+end
+
+function format_date(str::Union{AbstractString, Missing}, format; addyear = Year(0))
     if str === missing
         return missing
     elseif str == "!!!!"
@@ -20,7 +26,7 @@ function format_date(str::Union{String, Missing}, format; addyear = Year(0))
     end
 end
 
-function format_datetime(str::Union{String, Missing}, format; addyear = Year(0))
+function format_datetime(str::Union{AbstractString, Missing}, format; addyear = Year(0))
     if str === missing
         return missing
     elseif occursin("!!!!", str)
@@ -36,7 +42,7 @@ function format_datetime(str::Union{String, Missing}, format; addyear = Year(0))
     end
 end
 
-function format_time(str::Union{String, Missing}, format)
+function format_time(str::Union{AbstractString, Missing}, format)
     if str === missing
         return missing
     end

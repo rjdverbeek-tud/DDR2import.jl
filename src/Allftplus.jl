@@ -137,7 +137,7 @@ struct FlightlevelSpeed
     FL::Int64
     Spd::String
     Value::Int64
-    function FlightlevelSpeed(x::SubString{String})
+    function FlightlevelSpeed(x::AbstractString)
         flspdvalue = split(x, ':')
         FL = parse(Int64, flspdvalue[1][2:end])
         Spd = flspdvalue[2]
@@ -146,30 +146,95 @@ struct FlightlevelSpeed
     end
 end
 
-function reqFlightlevelSpeedList(flspdvalue::Union{String, Missing})
-    if flspdvalue === missing
+function reqFlightlevelSpeedList(items::Union{AbstractString, Missing})
+    if items === missing
         return missing
     else
-        return [FlightlevelSpeed(item) for item in split(flspdvalue)]
+        return [FlightlevelSpeed(item) for item in split(items)]
     end
 end
 
 struct AllFtPointProfile
-    datetime::DateTime
-    point::String
-    route::String
-    FL::Int64
-    pointDistance::Int64
-    pointType::Char
-    geoPointId::String
-    ratio::Int64
-    isVisible::Char  # Y indicated IFR/GAT/IFPSTART, N indicates VFR/OAT/IFPSTOP/STAY
-    function AllFtPointProfile(x::SubString{String})
-        flspdvalue = split(x, ':')
-        FL = parse(Int64, flspdvalue[1][2:end])
-        Spd = flspdvalue[2]
-        Value = parse(Int64, flspdvalue[3])
-        new(FL, Spd, Value)
+    datetime::Union{DateTime, Missing}
+    point::AbstractString
+    route::AbstractString
+    FL::Union{Int64, Missing}
+    pointDistance::Union{Int64, Missing}
+    pointType::AbstractString
+    geoPointId::Union{Point, AbstractString}
+    ratio::Union{Int64, Missing}
+    isVisible::Bool  # Y indicated IFR/GAT/IFPSTART, N indicates VFR/OAT/IFPSTOP/STAY
+    function AllFtPointProfile(x::AbstractString)
+        items = split(x, ':')
+        datetime = items[1] == "" ? missing : format_datetime(items[1], yyyymmddhhmmss)
+        point = items[2]
+        route = items[3]
+        FL = items[4] == "" ? missing : parse(Int64, items[4])
+        pointDistance = items[5] == "" ? missing : parse(Int64, items[5])
+        pointType = items[6]
+        geoPointId = occursin(r"\d{6}[NS]\d{7}[EW]", items[7]) ? latlon(items[7]) : items[7]
+        ratio = items[8] == "" ? missing : parse(Int64, items[8])
+        isVisible = items[9] == "Y" ? true : false
+        new(datetime, point, route, FL, pointDistance, pointType, geoPointId,
+        ratio, isVisible)
+    end
+end
+
+function latlon(str::AbstractString)
+    lon_h = parse(Float64, str[1:2])
+    lon_m = parse(Float64, str[3:4])
+    lon_s = parse(Float64, str[5:6])
+    sign_lon = str[7] == 'N' ? 1 : -1
+    lat_h = parse(Float64, str[8:10])
+    lat_m = parse(Float64, str[11:12])
+    lat_s = parse(Float64, str[13:14])
+    sign_lat = str[15] == 'E' ? 1 : -1
+    return Point(sign_lat*(lat_h + lat_m/60.0 + lat_s/3600.0),
+    sign_lon*(lon_h + lon_m/60.0 + lon_s/3600.0))
+end
+
+function AllFtPointProfileList(items::Union{AbstractString, Missing})
+    if items === missing
+        return missing
+    else
+        return [AllFtPointProfile(item) for item in split(items)]
+    end
+end
+
+struct AllFtAirspaceProfile
+    entry_datetime::Union{DateTime, Missing}
+    sector::AbstractString
+    exit_datetime::Union{DateTime, Missing}
+    fir::AbstractString
+    entry_geoPointId::Union{Point, AbstractString}
+    exit_geoPointId::Union{Point, AbstractString}
+    entry_FL::Union{Int64, Missing}
+    exit_FL::Union{Int64, Missing}
+    entry_pointDistance::Union{Int64, Missing}
+    exit_pointDistance::Union{Int64, Missing}
+    function AllFtAirspaceProfile(x::AbstractString)
+        items = split(x, ':')
+        entry_datetime = items[1] == "" ? missing : format_datetime(items[1], yyyymmddhhmmss)
+        sector = items[2]
+        exit_datetime = items[3] == "" ? missing : format_datetime(items[3], yyyymmddhhmmss)
+        fir = items[4]
+        entry_geoPointId = occursin(r"\d{6}[NS]\d{7}[EW]", items[5]) ? latlon(items[5]) : items[5]
+        exit_geoPointId = occursin(r"\d{6}[NS]\d{7}[EW]", items[6]) ? latlon(items[6]) : items[6]
+        entry_FL = items[7] == "" ? missing : parse(Int64, items[7])
+        exit_FL = items[8] == "" ? missing : parse(Int64, items[8])
+        entry_pointDistance = items[9] == "" ? missing : parse(Int64, items[9])
+        exit_pointDistance = items[10] == "" ? missing : parse(Int64, items[10])
+        new(entry_datetime, sector, exit_datetime, fir, entry_geoPointId,
+        exit_geoPointId, entry_FL, exit_FL, entry_pointDistance,
+        exit_pointDistance)
+    end
+end
+
+function AllFtAirspaceProfileList(items::Union{AbstractString, Missing})
+    if items === missing
+        return missing
+    else
+        return [AllFtAirspaceProfile(item) for item in split(items)]
     end
 end
 
