@@ -1,6 +1,8 @@
 """
 GAR fileformat
 See EUROCONTROL NEST Manual for Gar fileformat description
+
+Dictionary with point list (latitude + longitude [deg]) for each airblock ID (key)
 """
 module Gar
 
@@ -34,7 +36,7 @@ function splitintodict(iterator)
                 dict[airblockname] = points
             end
             j += 1
-        elseif row.AorP == "A" # "A"
+        elseif row.AorP == "A"
             airblockname = row.LAT_DEG
             n_points = parse(Int64, row.LON_DEG)
             points = Matrix{Float64}(undef, 0, 2)

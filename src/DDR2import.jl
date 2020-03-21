@@ -64,6 +64,8 @@ module DDR2import
     include("Exp2.jl")
     include("Allftplus.jl")
     include("Ase.jl")
+    include("Are.jl")
+    include("Gar.jl")
 end # module
 
 #TODO Implementation sequence

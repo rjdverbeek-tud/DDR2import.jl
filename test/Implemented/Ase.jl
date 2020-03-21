@@ -1,6 +1,6 @@
 # using Dates
 
-@testset "SO6.jl" begin
+@testset "Ase.jl" begin
     filename = "data\\VST_1713.ase"
     df = DDR2import.Ase.read(filename)
     @test df[1,:FLIGHTCOUNT] == 0.0
