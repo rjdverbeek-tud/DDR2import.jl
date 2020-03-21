@@ -1,13 +1,12 @@
-#TODO ftfmEetFirList_73
-#TODO ftfmEetPtList_75
-#TODO ftfmReqFlightlevelSpeedList_81
-
 """
 ALL_FT+ fileformat
 
 Defines a list of flight trajectories (planned/actual/etc) for a given day
 
 See EUROCONTROL NEST Manual Section 9.7.5 for ALL_FT+ fileformat description
+
+The headers of the DataFrame follow the naming convention from the EUROCONTROL
+NEST Manual + '_' + index_number from manual.
 """
 module Allftplus
 

@@ -63,6 +63,7 @@ module DDR2import
     include("SO6.jl")
     include("Exp2.jl")
     include("Allftplus.jl")
+    include("Ase.jl")
 end # module
 
 #TODO Implementation sequence
@@ -72,5 +73,6 @@ SO6
 T5
 EXP2
 ALL_FT+
+ASE
 ARE
 """

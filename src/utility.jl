@@ -4,7 +4,7 @@
 #
 using Dates
 
-"Point_deg type with latitude `ϕ` [deg] and longitude `λ` [deg]"
+"Point_deg type with latitude `lat` [deg] and longitude `lon` [deg]"
 struct Point{T<:Float64}
     lat::T
     lon::T

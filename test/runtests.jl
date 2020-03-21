@@ -3,8 +3,8 @@ using Test
 
 @testset "DDR2import.jl" begin
     # tests = ["Implemented\\SO6", "Implemented\\T5", "Implemented\\Exp2",
-    # "Implemented\\Allftplus"]
-    tests = ["Implemented\\Allftplus"]
+    # "Implemented\\Allftplus", "Implemented\\Ase"]
+    tests = ["Implemented\\Ase"]
 
     for t in tests
         include("$(t).jl")
