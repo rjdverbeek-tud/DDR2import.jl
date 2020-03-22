@@ -180,14 +180,14 @@ struct AllFtPointProfile
 end
 
 function latlon(str::AbstractString)
-    lon_h = parse(Float64, str[1:2])
-    lon_m = parse(Float64, str[3:4])
-    lon_s = parse(Float64, str[5:6])
-    sign_lon = str[7] == 'N' ? 1 : -1
-    lat_h = parse(Float64, str[8:10])
-    lat_m = parse(Float64, str[11:12])
-    lat_s = parse(Float64, str[13:14])
-    sign_lat = str[15] == 'E' ? 1 : -1
+    lat_h = parse(Float64, str[1:2])
+    lat_m = parse(Float64, str[3:4])
+    lat_s = parse(Float64, str[5:6])
+    sign_lat = str[7] == 'N' ? 1 : -1
+    lon_h = parse(Float64, str[8:10])
+    lon_m = parse(Float64, str[11:12])
+    lon_s = parse(Float64, str[13:14])
+    sign_lon = str[15] == 'E' ? 1 : -1
     return Point(sign_lat*(lat_h + lat_m/60.0 + lat_s/3600.0),
     sign_lon*(lon_h + lon_m/60.0 + lon_s/3600.0))
 end
