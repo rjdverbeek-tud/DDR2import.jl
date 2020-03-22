@@ -10,8 +10,6 @@ export read
 
 using Format
 using CSV
-using Dates
-# using StaticArrays
 
 const fileformat = Dict(1=>String, 2=>String, 3=>String)
 
