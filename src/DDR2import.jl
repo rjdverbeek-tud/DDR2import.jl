@@ -67,6 +67,7 @@ module DDR2import
     include("Are.jl")
     include("Gar.jl")
     include("Gsl.jl")
+    include("Frp.jl")
 end # module
 
 #TODO Implementation sequence
@@ -78,4 +79,8 @@ EXP2
 ALL_FT+
 ASE
 ARE
+Gar
+Gsl
+Frp
+Sls
 """
