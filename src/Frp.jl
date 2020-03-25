@@ -55,20 +55,20 @@ module Frp
 export read
 
 struct Point
-    Lat_deg::Float64
-    Lon_deg::Float64
+    lat_deg::Float64
+    lon_deg::Float64
 end
 
 struct FreeRoutePoint
-    Type::AbstractString
-    Name::AbstractString
-    Point::Union{Point, Missing}
+    type::AbstractString
+    name::AbstractString
+    point::Union{Point, Missing}
 end
 
 struct FreeRouteAirports
-    Type::AbstractString
-    Name::AbstractString
-    Airports::Vector{String}
+    type::AbstractString
+    name::AbstractString
+    airports::Vector{String}
 end
 
 struct FreeRouteArea
@@ -104,7 +104,6 @@ function read(file)
             if freerouteareaname != ""
                 freerouteareas[freerouteareaname] = FreeRouteArea(
                 freeroutepoints, freerouteairports)
-                println(freerouteareaname)
             end
             freerouteareaname = line_elements[1]
             freeroutepoints = Vector{FreeRoutePoint}()
@@ -122,25 +121,12 @@ function read(file)
             point_name = convert(String, line_elements[3])
             airports = Vector{String}()
             if length(line_elements) ≤ 3
-                # if line_elements[1] == "EI_FRA"
-                #     println(line)
-                #     println(airports)
-                # end
             elseif length(line_elements) == 4
                 airports = [convert(String, line_elements[4])]
-                # if line_elements[1] == "EI_FRA"
-                #     println(line)
-                #     println(airports)
-                # end
             else
-                # println(line_elements)
                 for airport in line_elements[4:end]
                     airports = vcat(airports, convert(String, airport))
                 end
-                # if line_elements[1] == "EI_FRA"
-                #     println(line)
-                #     println(airports)
-                # end
             end
             freerouteairports = vcat(freerouteairports, FreeRouteAirports(point_type,
             point_name, airports))
