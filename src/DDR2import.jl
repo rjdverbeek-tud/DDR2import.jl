@@ -71,19 +71,15 @@ module DDR2import
     include("Sls.jl")
     include("Sid.jl")
     include("Star.jl")
+    include("Spc.jl")
 end # module
 
 #TODO Implementation sequence
 """
 Implementation sequence
-SO6
-T5
-EXP2
-ALL_FT+
-ASE
-ARE
-Gar
-Gsl
-Frp
-Sls
+Spc
+MOT
+NARP
+NNPT
+NTFV
 """
