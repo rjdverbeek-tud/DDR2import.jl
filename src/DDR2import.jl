@@ -69,6 +69,7 @@ module DDR2import
     include("Gsl.jl")
     include("Frp.jl")
     include("Sls.jl")
+    include("Sid.jl")
 end # module
 
 #TODO Implementation sequence
