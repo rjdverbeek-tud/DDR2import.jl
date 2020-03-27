@@ -46,6 +46,13 @@ function format_time(str::Union{AbstractString, Missing}, format)
     if str === missing
         return missing
     end
+
+    # handling special case of 2400 hours used in ATM to indicate 0000 24 hours later
+    if str == "2400"
+        str = "235959"
+        format = DateFormat("HHMMSS")
+    end
+
     maybetime = tryparse(Time, str, format)
     if maybetime == nothing
         return missing
