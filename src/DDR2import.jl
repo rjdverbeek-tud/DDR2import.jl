@@ -73,6 +73,7 @@ module DDR2import
     include("Star.jl")
     include("Spc.jl")
     include("Mot.jl")
+    include("Narp.jl")
 end # module
 
 #TODO Implementation sequence
