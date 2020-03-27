@@ -7,8 +7,9 @@ using Test
     # "Implemented\\Gar", "Implemented\\Gsl", "Implemented\\Frp",
     # "Implemented\\Sls", "Implemented\\Sid", "Implemented\\Star",
     # "Implemented\\Spc", "Implemented\\Mot", "Implemented\\Narp",
-    # "Implemented\\Nnpt", "Implemented\\Cost", "Implemented\\Crco"]
-    tests = ["Implemented\\Ur"]
+    # "Implemented\\Nnpt", "Implemented\\Cost", "Implemented\\Crco",
+    # "Implemented\\Ur"]
+    tests = ["Implemented\\Arp"]
 
     for t in tests
         include("$(t).jl")

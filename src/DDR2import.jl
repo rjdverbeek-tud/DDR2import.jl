@@ -79,6 +79,7 @@ module DDR2import
     include("Cost.jl")
     include("Crco.jl")
     include("Ur.jl")
+    include("Arp.jl")
 end # module
 
 #TODO Implementation sequence
