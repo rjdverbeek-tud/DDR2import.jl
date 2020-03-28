@@ -81,12 +81,3 @@ module DDR2import
     include("Ur.jl")
     include("Arp.jl")
 end # module
-
-#TODO Implementation sequence
-"""
-Implementation sequence
-MOT
-NARP
-NNPT
-NTFV
-"""
