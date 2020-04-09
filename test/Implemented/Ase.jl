@@ -1,7 +1,7 @@
 # using Dates
 
 @testset "Ase.jl" begin
-    filename = "data\\VST_1713.ase"
+    filename = "data\\test.ase"
     df = DDR2import.Ase.read(filename)
     @test df[1,:FLIGHTCOUNT] == 0.0
     @test df[1,:SEGMENTPARITY] == 1

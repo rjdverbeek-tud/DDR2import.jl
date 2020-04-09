@@ -1,5 +1,5 @@
 @testset "Narp.jl" begin
-    filename = "data\\Airport_1713.narp"
+    filename = "data\\test.narp"
     df = DDR2import.Narp.read(filename)
     @test df[1, :AIRPORT_ID] == "AGGA"
     @test df[2, :AIRPORT_NAME] == "BALALAE"

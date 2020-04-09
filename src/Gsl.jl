@@ -44,6 +44,8 @@ A;108BI;+;0;999
 """
 module Gsl
 
+#TODO Last Sector is not read correctly. Correction needed and test.
+
 export read
 
 struct Airblock

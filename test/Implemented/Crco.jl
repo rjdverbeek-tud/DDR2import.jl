@@ -1,7 +1,7 @@
 using Dates
 
 @testset "Crco.jl" begin
-    filename = "data\\Test.crco"
+    filename = "data\\test.crco"
     df = DDR2import.Crco.read(filename)
     @test df[1, :COUNTRYNAME] == "ED"
     @test df[2, :CALLSIGN] == "N182QS"

@@ -1,8 +1,8 @@
 using Dates
 
 @testset "Allftplus.jl" begin
-    filename = "data\\20171215_from_NEST.ALL_FT+"
-    filename2 = "data\\20190103_subset.ALL_FT+"
+    filename = "data\\test1.ALL_FT+"
+    filename2 = "data\\test2.ALL_FT+"
     df = DDR2import.Allftplus.read(filename)
     df2 = DDR2import.Allftplus.read(filename2)
     #EXP
@@ -41,9 +41,9 @@ using Dates
     @test df[2,:mostPenalizingRegulationId_28] == "EHAMA15M"
     @test df[2,:regulationsAffectedByNrOfInstances_29] == 0
     @test df[2,:excludedFromNrOfInstances_30] == 0
-    @test df2[44,:lastReceivedAtfmMessageTitle_31] == "REA"
+    @test df2[6,:lastReceivedAtfmMessageTitle_31] == "REA"
     @test df2[2,:lastReceivedMessageTitle_32] == "FPL"
-    @test df2[44,:lastSentAtfmMessageTitle_33] == "SRM"
+    @test df2[6,:lastSentAtfmMessageTitle_33] == "SRM"
     @test df[2,:manualExemptionReason_34] == "N"
     @test df2[2,:sensitiveFlight_35] == "N"
     @test df2[2,:readyForImprovement_36] == "Y"

@@ -1,5 +1,5 @@
 @testset "Ntfv.jl" begin
-    filename = "data\\TrafficVolume_1713.ntfv"
+    filename = "data\\test.ntfv"
     dc = DDR2import.Ntfv.read(filename)
     @test dc["ABSON"].name == ""
     @test dc["ALASO"].category == "_"

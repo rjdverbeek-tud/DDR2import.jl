@@ -4,5 +4,8 @@
 .DS_Store
 /Manifest.toml
 /dev/
-/test/data/
 /docs/DDR2_fileformat_description.pdf
+/not_yet_implemented/
+/outdated/
+/under_construction/
+/data/

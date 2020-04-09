@@ -1,7 +1,7 @@
 using Dates
 
 @testset "SO6.jl" begin
-    filename = "data\\20171215_Initial_From_NEST.so6"
+    filename = "data\\test.so6"
     df = DDR2import.SO6.read(filename)
     @test df[2,:SEGMENT_ID] == "*AM80_!AAEW"
     @test df[2,:ADEP] == "EHAM"

@@ -1,7 +1,7 @@
 using Dates
 
 @testset "Exp2.jl" begin
-    filename = "data\\20171215_from_NEST.exp2"
+    filename = "data\\test.exp2"
     df = DDR2import.Exp2.read(filename)
     #EXP
     @test df[2,:ADEP] == "EHAM"

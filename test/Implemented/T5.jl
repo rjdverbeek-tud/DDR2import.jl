@@ -1,7 +1,7 @@
 import Dates
 
 @testset "T5.jl" begin
-    filename = "data\\20171215_Initial_From_NEST.t5"
+    filename = "data\\test.t5"
     df = DDR2import.T5.read(filename)
     @test df[2,:FLIGHT_ID] == 213765625
     @test df[2,:SECTOR_NAME] == "EHAAFIR"

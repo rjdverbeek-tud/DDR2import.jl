@@ -17,7 +17,7 @@ F;EDNY>;IN
 ;EX
 """
 module Ntfv
-
+#TODO Last element is not correctly read. Correction needed.
 export read
 
 struct Airblock

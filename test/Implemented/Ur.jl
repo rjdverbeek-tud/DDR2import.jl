@@ -1,7 +1,7 @@
 using Dates
 
 @testset "Ur.jl" begin
-    filename = "data\\ur-2020-02.ur"
+    filename = "data\\test.ur"
     df = DDR2import.Ur.read(filename)
     @test df[1, :SECTOR] == "AZ"
     @test Dates.day(df[2, :STARTDATE]) == 1

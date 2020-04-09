@@ -1,7 +1,7 @@
 # using Dates
 
 @testset "Spc.jl" begin
-    filename = "data\\Airspace_1713.spc"
+    filename = "data\\test.spc"
     dc = DDR2import.Spc.read(filename)
     @test dc["AFI"].name == "AFRICA"
     @test dc["AFI"].type == "AREA"
