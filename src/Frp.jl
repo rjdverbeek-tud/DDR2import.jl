@@ -136,6 +136,8 @@ function read(file)
 
         end
     end
+    freerouteareas[freerouteareaname] = FreeRouteArea(
+    freeroutepoints, freerouteairports)
     return freerouteareas
 end
 

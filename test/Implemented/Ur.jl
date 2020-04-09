@@ -2,12 +2,13 @@ using Dates
 
 @testset "Ur.jl" begin
     filename = "data\\test.ur"
-    df = DDR2import.Ur.read(filename)
-    @test df[1, :SECTOR] == "AZ"
-    @test Dates.day(df[2, :STARTDATE]) == 1
-    @test Dates.month(df[3, :ENDDATE]) == 2
-    @test df[4, :UNITRATE] == 31.51
-    @test df[6, :VALUTACONVERSION] == 0.848504
-    # @test df[6, :VALUTA] == "GBP"
-    # @test df[7, :COUNTRY] == "Netherlands"
+    dc = DDR2import.Ur.read(filename)
+    @test Dates.day(dc["EB"].start_date) == 1
+    @test Dates.month(dc["ED"].end_date) == 2
+    @test dc["EE"].unitrate == 31.51
+    @test dc["EG"].valutaconversion == 0.848504
+    @test dc["EG"].valuta == "GBP"
+    @test dc["EH"].country == "Netherlands"
+    #LAST
+    @test dc["UG"].unitrate == 28.30
 end

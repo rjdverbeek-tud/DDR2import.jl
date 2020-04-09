@@ -7,4 +7,7 @@
     @test dc["AFI"].type == "AREA"
     @test dc["AFI"].sectors[1].name == "DA"
     @test dc["AFI"].sectors[2].type == "NAS"
+    #LAST
+    @test dc["BENELUX"].name == "EB/EH"
+    @test dc["BENELUX"].sectors[end].name == "EH"
 end

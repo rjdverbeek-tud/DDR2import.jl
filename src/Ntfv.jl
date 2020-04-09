@@ -63,6 +63,8 @@ function read(file)
             line_elements[3]))
         end
     end
+    trafficvolumes[tv_id] = Trafficvolume(tv_name, category,
+    reflocname, refloctype, reflocrole, airblocks)
     return trafficvolumes
 end
 #

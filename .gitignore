@@ -5,7 +5,7 @@
 /Manifest.toml
 /dev/
 /docs/DDR2_fileformat_description.pdf
-/not_yet_implemented/
-/outdated/
-/under_construction/
+src/not_yet_implemented/
+src/outdated/
+src/under_construction/
 /data/

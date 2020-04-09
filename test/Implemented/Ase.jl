@@ -11,4 +11,6 @@
     @test df[1,:LATENDSEGMENT_DEG] ≈ 48.6956 atol = 0.0001
     @test df[1,:LONENDSEGMENT_DEG] ≈ 10.9489 atol = 0.0001
     @test df[1,:SEGMENTNAME] == "%%BRU_BURAM"
+    #LAST TEST
+    @test df[3,:SEGMENTNAME] == "%%EDH_WSN"
 end

@@ -17,4 +17,6 @@ import Dates
     @test df[2,:EXIT_SEGMENT_NAME] == "!AAEb_SONEB"
     @test df[2,:TOT_DISTANCE_IN_SEGMENT_M] == 84.060844 * 1852.0
     @test df[2,:TOT_TIME_IN_SEGMENT_S] == 840.0
+    #LAST
+    @test df[4,:SECTOR_NAME] == "EH_DN"
 end

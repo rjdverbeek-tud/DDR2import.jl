@@ -9,4 +9,6 @@
     @test df[9, :TRS] == 0
     @test df[9, :TAXITIME] == 0
     @test df[9, :ALTITUDE_FL] == 82
+    #LAST
+    @test df[13, :AIRPORT_ID] == "AGGV"
 end

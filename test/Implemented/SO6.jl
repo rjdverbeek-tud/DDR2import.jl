@@ -24,4 +24,6 @@ using Dates
     @test Dates.second(df[2,:DATETIMEBEGINSEGMENT]) == 26
     @test Dates.day(df[2,:DATETIMEENDSEGMENT]) == 14
     @test Dates.minute(df[2,:DATETIMEENDSEGMENT]) == 50
+    #LAST
+    @test df[3,:SEGMENT_ID] == "!AAEW_!AAEX"
 end

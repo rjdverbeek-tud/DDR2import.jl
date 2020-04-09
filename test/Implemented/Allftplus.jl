@@ -192,4 +192,6 @@ using Dates
     # @test df[2,:rtfmTvProfile_178] === missing
     @test df[2,:ctfmNrTvProfiles_179] === missing
     # @test df[2,:ctfmTvProfile_180] === missing
+    #LAST TEST
+    @test df[5,:departureAerodromeIcaoId_0] == "WSSS"
 end

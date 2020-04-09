@@ -5,4 +5,6 @@
     @test df[2, :LAT_DEG] ≈ 53.3941667 atol = 0.001
     @test df[3, :LON_DEG] ≈ -1.7 atol = 0.001
     @test df[4, :FIR] == "EGTT_FIR"
+    #LAST TEST
+    @test df[5, :AIRPORT] == "EGTB"
 end

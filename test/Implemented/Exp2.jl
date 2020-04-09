@@ -107,4 +107,7 @@ using Dates
     #TODO test CTFMAIRAC
     #TODO test CTFMENVBASELINENUM
     #TODO test LASTRECEIVEDPROGRESSMESSAGE
+
+    #LAST TEST
+    @test df[5,:ADEP] == "UUEE"
 end

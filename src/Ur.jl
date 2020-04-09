@@ -27,37 +27,41 @@ module Ur
 export read
 
 include("utility.jl")
-using CSV
 using Dates
-using DataFrames
 
 const yyyymmdd = DateFormat("yyyy/mm/dd")
 
-const fileformat = Dict(1=>String, 2=>String, 3=>String, 4=>Float64, 5=>Float64,
-6=>String, 7=>String)
-
-const header_format = ["SECTOR", "STARTDATE", "ENDDATE", "UNITRATE",
-"VALUTACONVERSION", "VALUTA", "COUNTRY"]
-
-function read(file)
-    df = CSV.read(file, types=fileformat, header=header_format,
-    copycols=true)
-    reformat!(df)
-    return df
+struct UnitRate
+    start_date::Date
+    end_date::Date
+    unitrate::Float64
+    valutaconversion::Float64
+    valuta::String
+    country::String
+    function UnitRate(line::String)
+        line_elements = split(line, '\t')
+        start_date = format_date(line_elements[2], yyyymmdd)
+        end_date = format_date(line_elements[3], yyyymmdd)
+        unitrate = parse(Float64, line_elements[4]) / 100.0
+        if length(line_elements[5]) > 0
+            valutaconversion = parse(Float64, line_elements[5])
+            valuta = strip(line_elements[6])
+            country = strip(line_elements[7])
+        else
+            valutaconversion = 1.0
+            valuta = "EUR"
+            country = strip(line_elements[7])
+        end
+        new(start_date, end_date, unitrate, valutaconversion, valuta, country)
+    end
 end
 
-function reformat!(df)
-    df[:,:UNITRATE] = df[:,:UNITRATE] / 100.0
-
-    df[:,:TEMP] = format_date.(df[:,:STARTDATE], yyyymmdd)
-    select!(df, Not(:STARTDATE))
-    df[:,:STARTDATE] =  df[:,:TEMP]
-    select!(df, Not(:TEMP))
-
-    df[:,:TEMP] = format_date.(df[:,:ENDDATE], yyyymmdd)
-    select!(df, Not(:ENDDATE))
-    df[:,:ENDDATE] =  df[:,:TEMP]
-    select!(df, Not(:TEMP))
+function read(file)
+    ur = Dict{String, UnitRate}()
+    for line in eachline(file)
+        ur[line[1:2]] = UnitRate(line)
+    end
+    return ur
 end
 
 end # module

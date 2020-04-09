@@ -8,8 +8,8 @@ using Test
     "Implemented\\Sls", "Implemented\\Sid", "Implemented\\Star",
     "Implemented\\Spc", "Implemented\\Mot", "Implemented\\Narp",
     "Implemented\\Nnpt", "Implemented\\Cost", "Implemented\\Crco",
-    "Implemented\\Ur", "Implemented\\Arp"]
-    # tests = ["Implemented\\Allftplus"]
+    "Implemented\\Ur", "Implemented\\Arp", "Implemented\\Ntfv"]
+    # tests = ["Implemented\\Frp"]
 
     for t in tests
         include("$(t).jl")

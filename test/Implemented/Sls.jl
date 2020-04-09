@@ -5,4 +5,6 @@
     @test df[3,:VOLUMENAME] == "BIRD_DOMESTIC"
     @test df[36,:VOLUMEBOTTOMLEVEL] == 275
     @test df[37,:VOLUMETOPLEVEL] == 660
+    #LAST
+    @test df[39,:SECTORNAME] == "UKOV_FRA"
 end

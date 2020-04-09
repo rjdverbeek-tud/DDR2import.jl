@@ -5,5 +5,6 @@ using Dates
     dc = DDR2import.Mot.read(filename)
     @test Dates.hour(dc["NAT1"].onlytimes[1].begintime) == 0
     @test Dates.second(dc["NAT1"].onlytimes[1].endtime) == 59
+    #LAST
     @test dc["UKOV_FRA"].timetypes[1].type == "EX"
 end

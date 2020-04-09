@@ -88,6 +88,7 @@ function read(file)
             airblocks = vcat(airblocks, airblock)
         end
     end
+    sectors[id] = Sector(id, sname, category, type, airblocks)
     return sectors
 end
 

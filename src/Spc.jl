@@ -70,6 +70,7 @@ function read(file)
             sectors = vcat(sectors, sector)
         end
     end
+    airspaces[id] = Airspace(aname, type, sectors)
     return airspaces
 end
 
