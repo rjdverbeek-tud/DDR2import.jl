@@ -56,15 +56,12 @@ module Frp
 
 export read
 
-struct Point
-    lat_deg::Float64
-    lon_deg::Float64
-end
+include("utility.jl")
 
 struct FreeRoutePoint
     type::AbstractString
     name::AbstractString
-    point::Union{Point, Missing}
+    point::Union{Point, AbstractString, Missing}
 end
 
 struct FreeRouteAirports
@@ -78,29 +75,87 @@ struct FreeRouteArea
     freerouteairports::Vector{FreeRouteAirports}
 end
 
-function latlon(str::AbstractString)
-    if length(str) == 15
-        sign_lat = str[1] == 'N' ? 1 : -1
-        lat_h = parse(Float64, str[2:3])
-        lat_m = parse(Float64, str[4:5])
-        lat_s = parse(Float64, str[6:7])
-        sign_lon = str[8] == 'E' ? 1 : -1
-        lon_h = parse(Float64, str[9:11])
-        lon_m = parse(Float64, str[12:13])
-        lon_s = parse(Float64, str[14:15])
-    else
-        return missing
-    end
-    return Point(sign_lat*(lat_h + lat_m/60.0 + lat_s/3600.0),
-    sign_lon*(lon_h + lon_m/60.0 + lon_s/3600.0))
-end
+# function extract_lat(str::AbstractString)
+#     if length(str) == 7
+#         if str[1] in ['N','S']
+#             sign_lat = str[1] == 'N' ? 1 : -1
+#             lat_h = parse(Float64, str[2:3])
+#             lat_m = parse(Float64, str[4:5])
+#             lat_s = parse(Float64, str[6:7])
+#         else
+#             sign_lat = str[7] == 'N' ? 1 : -1
+#             lat_h = parse(Float64, str[1:2])
+#             lat_m = parse(Float64, str[3:4])
+#             lat_s = parse(Float64, str[5:6])
+#         end
+#     elseif length(str) == 5
+#         if str[1] in ['N','S']
+#             sign_lat = str[1] == 'N' ? 1 : -1
+#             lat_h = parse(Float64, str[2:3])
+#             lat_m = parse(Float64, str[4:5])
+#             lat_s = 0.0
+#         else
+#             sign_lat = str[5] == 'N' ? 1 : -1
+#             lat_h = parse(Float64, str[1:2])
+#             lat_m = parse(Float64, str[3:4])
+#             lat_s = 0.0
+#         end
+#     else
+#         return missing
+#     end
+#     return sign_lat*(lat_h + lat_m/60.0 + lat_s/3600.0)
+# end
+#
+# function extract_lon(str::AbstractString)
+#     if length(str) == 8
+#         if str[1] in ['E','W']
+#             sign_lon = str[1] == 'E' ? 1 : -1
+#             lon_h = parse(Float64, str[2:4])
+#             lon_m = parse(Float64, str[5:6])
+#             lon_s = parse(Float64, str[7:8])
+#         else
+#             sign_lon = str[8] == 'E' ? 1 : -1
+#             lon_h = parse(Float64, str[1:3])
+#             lon_m = parse(Float64, str[4:5])
+#             lon_s = parse(Float64, str[6:7])
+#         end
+#     elseif length(str) == 6
+#         if str[1] in ['E','W']
+#             sign_lon = str[1] == 'E' ? 1 : -1
+#             lon_h = parse(Float64, str[2:4])
+#             lon_m = parse(Float64, str[5:6])
+#             lon_s = 0.0
+#         else
+#             sign_lon = str[6] == 'E' ? 1 : -1
+#             lon_h = parse(Float64, str[1:3])
+#             lon_m = parse(Float64, str[4:5])
+#             lon_s = 0.0
+#         end
+#     else
+#         return missing
+#     end
+#     return sign_lon*(lon_h + lon_m/60.0 + lon_s/3600.0)
+# end
+#
+# function latlon(str_lat::AbstractString, str_lon::AbstractString)
+#     lat = extract_lat(str_lat)
+#     lon = extract_lon(str_lon)
+#     if !ismissing(lat*lon)
+#         return Point(lat, lon)
+#     else
+#         return missing
+#     end
+# end
 
 function read(file)
     freerouteareas = Dict{String, FreeRouteArea}()
     freerouteareaname = ""
     freeroutepoints = Vector{FreeRoutePoint}()
     freerouteairports = Vector{FreeRouteAirports}()
-    for line in eachline(file)
+
+    lines = sort(readlines(file))
+
+    for line in lines
         line_elements = split(line, ' ')
         if line_elements[1] != freerouteareaname  # new freeroutearea
             if freerouteareaname != ""
@@ -115,7 +170,15 @@ function read(file)
         if line_elements[2] in ["E", "X", "EX", "I", "EI", "XI", "EXI"]
             point_type = convert(String, line_elements[2])
             point_name = convert(String, line_elements[3])
-            point = latlon(line_elements[4] * line_elements[5])
+            if length(line_elements) > 4
+                point = latlon(line_elements[4], line_elements[5])
+            elseif length(line_elements) > 3
+                # println(line_elements)
+                point = line_elements[4]
+            else
+                # println(line_elements)
+                point = missing
+            end
             freeroutepoints = vcat(freeroutepoints, FreeRoutePoint(point_type,
             point_name, point))
         elseif line_elements[2] in ["D", "A", "AD"]
