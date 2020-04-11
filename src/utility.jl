@@ -10,6 +10,13 @@ struct Point{T<:Float64}
     lon::T
 end
 
+"Point_deg type with latitude `lat` [deg], longitude `lon` [deg] and altitude [m]"
+struct Point3D{T<:Float64}
+    lat::T
+    lon::T
+    alt::T
+end
+
 function extract_lat(str::AbstractString)
     if str[1] in ['N', 'S']
         sign_lat = str[1] == 'N' ? 1 : -1

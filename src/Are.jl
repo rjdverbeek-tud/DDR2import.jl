@@ -37,9 +37,20 @@ module Are
 
 export read
 
+include("utility.jl")
 using Format
 using CSV
 using Dates
+using Navigation
+
+# struct Airspace
+#     nb_point::Int64
+#     bottom_fl::Float64
+#     top_fl::Float64
+#     surface::Float64
+#     sector_num::Float64
+#     points::Matrix{Float64}
+# end
 
 struct Airspace
     nb_point::Int64
@@ -48,6 +59,7 @@ struct Airspace
     surface::Float64
     sector_num::Float64
     points::Matrix{Float64}
+    box::Array{Float64, 2}
 end
 
 function read(filename)
@@ -68,8 +80,14 @@ function read(filename)
                 lon = parse(Float64, splitline[2]) / 60.0
                 points = vcat(points, [lat lon])
                 if j == nb_point
+                    # box = Array{Float64, 2}(undef, 2, 2)
+                    # box[1,1] = maximum(points[:,1])
+                    # box[1,2] = maximum(points[:,2])
+                    # box[2,1] = minimum(points[:,1])
+                    # box[2,2] = minimum(points[:,2])
+                    box = box_spherical_polygon(points)
                     dict[name] = Airspace(nb_point, bottom_fl, top_fl, surface,
-                    sector_num, points)
+                    sector_num, points, box)
                 end
                 j += 1
             elseif length(splitline) == 15
@@ -87,6 +105,74 @@ function read(filename)
         end
     end
     return dict
+end
+
+function isinside(are::Airspace, point::Point)
+    # test if inside box
+    if isinsidebox(are, point)
+        #test if inside polygon
+        return NaN
+    else
+        return false
+    end
+end
+
+function box_spherical_polygon(points::Array{Float64,2})
+    box = Array{Float64, 2}(undef, 2, 2)
+    lats_max = Array{Float64,1}()
+    lats_min = Array{Float64,1}()
+    previous_point = Array{Float64,1}()
+    for point in eachrow(points)
+        if isempty(previous_point)
+            previous_point = point
+        else
+            pos₁ = Point(previous_point[1], previous_point[2])
+            pos₂ = Point(point[1], point[2])
+            append!(lats_max, maximum(latitude_options(pos₁, pos₂)))
+            append!(lats_min, minimum(latitude_options(pos₁, pos₂)))
+            previous_point = point
+        end
+    end
+    box[1,1] = maximum(lats_max)
+    box[2,1] = minimum(lats_min)
+
+    # Limiting longitudes
+    box[1,2] = maximum(points[:,2])
+    box[2,2] = minimum(points[:,2])
+    return box
+end
+
+function latitude_options(pos₁::Point, pos₂::Point)
+    #TODO Check if this also works on South side of globe
+    θᵢ = 0.0
+    lat_max = 0.0
+    lon_max = 0.0
+    if pos₁.lon != pos₂.lon
+        θᵢ = atan(sin(deg2rad(pos₂.lon - pos₁.lon)) * cos(deg2rad(pos₂.lat)),
+        cos(deg2rad(pos₁.lat))*sin(deg2rad(pos₂.lat)) -
+        sin(deg2rad(pos₁.lat))*cos(deg2rad(pos₂.lat))*cos(deg2rad(pos₂.lon -
+        pos₁.lon)))
+        lon_max = pos₁.lon + rad2deg(atan(1.0,tan(θᵢ)*sin(deg2rad(pos₁.lat))))
+    elseif pos₁.lat < pos₂.lat
+        θᵢ = 0.0
+        lon_max = pos₁.lon
+    elseif pos₁.lat > pos₂.lat
+        θᵢ = π*1.0
+        lon_max = pos₁.lon
+    else
+        return pos₁.lat
+    end
+    if pos₁.lon < lon_max < pos₂.lon || pos₂.lon < lon_max < pos₁.lon
+        return rad2deg(acos(abs(sin(θᵢ)cos(deg2rad(pos₁.lat))))), pos₁.lat, pos₂.lat
+    # elseif pos₁.lon < lon_max-180.0 < pos₂.lon || pos₂.lon < lon_max-180.0 < pos₁.lon
+    #     return -rad2deg(acos(abs(sin(θᵢ)cos(deg2rad(pos₁.lat))))), pos₁.lat, pos₂.lat
+    else
+        return pos₁.lat, pos₂.lat
+    end
+end
+
+function isinsidebox(are::Airspace, point::Point)
+    return are.box[2,1] < point.lat < are.box[1,1] && are.box[2,2] < point.lon < are.box[1,2]
 end
 
 end # module

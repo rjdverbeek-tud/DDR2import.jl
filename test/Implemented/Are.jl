@@ -10,6 +10,7 @@
     @test dc["AZ"].sector_num == 0.0
     @test dc["AZ"].points[5,1] == 45.0
     @test dc["AZ"].points[4,2] == -40.0
+    @test dc["AZ"].box[1,1] == 45.0
     #LAST TEST
     @test dc["EB"].nb_point == 550
     @test dc["EB"].points[550,1] == 51.5
