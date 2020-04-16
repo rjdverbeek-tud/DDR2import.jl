@@ -86,6 +86,7 @@ using Dates
     @test df2[2,:ftfmEetFirNrOfInstances_72] == 0
     @test df2[1,:ftfmEetFirList_73] == "EHAAFIR:10"
     @test df2[2,:ftfmEetPtNrOfInstances_74] == 0
+    #TODO Setup function to extract EetPtList
     @test df2[1,:ftfmEetPtList_75] == "55N020W:125 57N030W:170 58N040W:211 58N050W:251 CUDDY:281"
     @test df2[2,:ftfmAiracCycleReleaseNumber_76] == 447
     @test df2[2,:ftfmEnvBaselineNumber_77] == 842
@@ -93,12 +94,38 @@ using Dates
     @test df2[2,:ftfmArrivalRunway_79] == "GCHI34"
     @test df[2,:ftfmReqFlightlevelSpeedNrOfInstances_80] == 1
     @test df2[1,:ftfmReqFlightlevelSpeedList_81] == "F320:N0487:0 F340:M084:1383 F360:M084:4022"
+    fll = DDR2import.Allftplus.reqFlightlevelSpeedList(df2[1,:ftfmReqFlightlevelSpeedList_81])
+    @test fll[1].FL == 320
+    @test fll[2].Spd == "M084"
+    @test fll[3].Value == 4022  # TODO What is Value? Time in seconds? Travel distance in NM?
     @test df2[2,:ftfmConsumedFuel_82] == 322.0
     @test df2[2,:ftfmRouteCharges_83] == 49.0
     @test df2[2,:ftfmAllFtPointNrOfInstances_84] == 16
+    pp = DDR2import.Allftplus.AllFtPointProfileList(df2[2,:ftfmAllFtPointProfile_85])
+    @test Dates.minute(pp[1].datetime) == 10
+    @test pp[5].point == "TESEL"
+    @test pp[1].route == "HIE1J"
+    @test pp[2].FL == 25
+    @test pp[3].pointDistance == 11
+    @test pp[4].pointType == "V"
+    @test pp[6].geoPointId.ϕ ≈ 28.461666 atol = 0.0001
+    @test pp[6].geoPointId.λ ≈ -16.875555555555557 atol = 0.0001
+    @test pp[8].ratio == 54
+    @test pp[9].isVisible == true
     #@test df[2,:ftfmAllFtPointProfile_85]
     @test df2[2,:ftfmAllFtAirspaceNrOfInstances_86] == 10
     #@test df[2,:ftfmAllFtAirspaceProfile_87]
+    ap = DDR2import.Allftplus.AllFtAirspaceProfileList(df2[2,:ftfmAllFtAirspaceProfile_87])
+    @test Dates.minute(ap[1].entry_datetime) == 10
+    @test ap[2].sector == "GCXOAXO"
+    @test Dates.day(ap[3].exit_datetime) == 3
+    @test ap[4].fir == "NAS"
+    @test ap[5].entry_geoPointId.ϕ ≈ 28.47222222222222 atol = 0.00001
+    @test ap[6].exit_geoPointId.λ ≈ -17.3275 atol = 0.00001
+    @test ap[7].entry_FL == 80
+    @test ap[8].exit_FL == 80
+    @test ap[9].entry_pointDistance == 119
+    @test ap[10].exit_pointDistance == 185
     @test df2[2,:ftfmAllFtCircleIntersectionsNrOfInstances_88] == 2
     #@test df[2,:ftfmAllFtCircleIntersections_89]
     @test df2[3,:rtfmAiracCycleReleaseNumber_90] == 447

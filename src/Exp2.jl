@@ -101,7 +101,7 @@ module Exp2
 
 export read
 
-# include("utility.jl")
+#TODO Keep unused fields?
 using ..util  # new
 using Format
 using CSV

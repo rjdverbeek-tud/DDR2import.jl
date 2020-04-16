@@ -10,7 +10,7 @@ using Test
     "Implemented\\Nnpt", "Implemented\\Cost", "Implemented\\Crco",
     "Implemented\\Ur", "Implemented\\Arp", "Implemented\\Ntfv",
     "util"]
-    # tests = ["util"]
+    # tests = ["Implemented\\Allftplus"]
 
     for t in tests
         include("$(t).jl")

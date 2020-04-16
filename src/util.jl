@@ -91,16 +91,16 @@ function latlon(str_lat::AbstractString, str_lon::AbstractString)
 end
 
 function latlon(str::AbstractString)
-    eorw = "W"
-    if occursin("E", str)
-        eorw = "E"
+    nors = "S"
+    if occursin("S", str)
+        nors = "S"
     else
-        eorw = "W"
+        nors = "N"
     end
 
-    split_str = split(str, eorw)
-    str_lat = split_str[1]
-    str_lon = eorw*split_str[2]
+    split_str = split(str, nors)
+    str_lat = split_str[1]*nors
+    str_lon = split_str[2]
     return latlon(str_lat, str_lon)
 end
 

@@ -35,9 +35,9 @@ using Dates
     @test DDR2import.util.latlon("S123456", "012E").λ ≈ 12.0 atol = 0.0001
     @test DDR2import.util.latlon("S123456", "E1") === NaN
 
-    @test DDR2import.util.latlon("S123456E1123456.0").ϕ ≈ -12.58222222 atol = 0.0001
-    @test DDR2import.util.latlon("S123456E1123456.0").λ ≈ 112.58222222 atol = 0.0001
-    @test DDR2import.util.latlon("S123456W1123456.0").λ ≈ -112.58222222 atol = 0.0001
+    @test DDR2import.util.latlon("123456S1123456.0E").ϕ ≈ -12.58222222 atol = 0.0001
+    @test DDR2import.util.latlon("123456S1123456.0E").λ ≈ 112.58222222 atol = 0.0001
+    @test DDR2import.util.latlon("123456S1123456.0W").λ ≈ -112.58222222 atol = 0.0001
 
 
     yymmdd = DateFormat("YYmmdd")

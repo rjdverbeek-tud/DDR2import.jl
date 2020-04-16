@@ -52,11 +52,8 @@ ALBANIA I VOLBI N413855 E0194122
 """
 module Frp
 
-#TODO Last Area is not read correctly. Needs correction.
-
 export read
 
-# include("utility.jl")
 using ..util
 
 struct FreeRoutePoint
@@ -76,78 +73,6 @@ struct FreeRouteArea
     freeroutepoints::Vector{FreeRoutePoint}
     freerouteairports::Vector{FreeRouteAirports}
 end
-
-# function extract_lat(str::AbstractString)
-#     if length(str) == 7
-#         if str[1] in ['N','S']
-#             sign_lat = str[1] == 'N' ? 1 : -1
-#             lat_h = parse(Float64, str[2:3])
-#             lat_m = parse(Float64, str[4:5])
-#             lat_s = parse(Float64, str[6:7])
-#         else
-#             sign_lat = str[7] == 'N' ? 1 : -1
-#             lat_h = parse(Float64, str[1:2])
-#             lat_m = parse(Float64, str[3:4])
-#             lat_s = parse(Float64, str[5:6])
-#         end
-#     elseif length(str) == 5
-#         if str[1] in ['N','S']
-#             sign_lat = str[1] == 'N' ? 1 : -1
-#             lat_h = parse(Float64, str[2:3])
-#             lat_m = parse(Float64, str[4:5])
-#             lat_s = 0.0
-#         else
-#             sign_lat = str[5] == 'N' ? 1 : -1
-#             lat_h = parse(Float64, str[1:2])
-#             lat_m = parse(Float64, str[3:4])
-#             lat_s = 0.0
-#         end
-#     else
-#         return missing
-#     end
-#     return sign_lat*(lat_h + lat_m/60.0 + lat_s/3600.0)
-# end
-#
-# function extract_lon(str::AbstractString)
-#     if length(str) == 8
-#         if str[1] in ['E','W']
-#             sign_lon = str[1] == 'E' ? 1 : -1
-#             lon_h = parse(Float64, str[2:4])
-#             lon_m = parse(Float64, str[5:6])
-#             lon_s = parse(Float64, str[7:8])
-#         else
-#             sign_lon = str[8] == 'E' ? 1 : -1
-#             lon_h = parse(Float64, str[1:3])
-#             lon_m = parse(Float64, str[4:5])
-#             lon_s = parse(Float64, str[6:7])
-#         end
-#     elseif length(str) == 6
-#         if str[1] in ['E','W']
-#             sign_lon = str[1] == 'E' ? 1 : -1
-#             lon_h = parse(Float64, str[2:4])
-#             lon_m = parse(Float64, str[5:6])
-#             lon_s = 0.0
-#         else
-#             sign_lon = str[6] == 'E' ? 1 : -1
-#             lon_h = parse(Float64, str[1:3])
-#             lon_m = parse(Float64, str[4:5])
-#             lon_s = 0.0
-#         end
-#     else
-#         return missing
-#     end
-#     return sign_lon*(lon_h + lon_m/60.0 + lon_s/3600.0)
-# end
-#
-# function latlon(str_lat::AbstractString, str_lon::AbstractString)
-#     lat = extract_lat(str_lat)
-#     lon = extract_lon(str_lon)
-#     if !ismissing(lat*lon)
-#         return Point(lat, lon)
-#     else
-#         return missing
-#     end
-# end
 
 function read(file)
     freerouteareas = Dict{String, FreeRouteArea}()

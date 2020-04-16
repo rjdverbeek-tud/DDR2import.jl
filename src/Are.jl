@@ -131,19 +131,6 @@ function box_spherical_polygon(points::Array{Float64,2})
     return box
 end
 
-# function latitude_options(pos₁::Point, pos₂::Point)
-#     pos₁_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
-#     pos₂_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
-#     bearing = Navigation.bearing(pos₁_deg, pos₂_deg)
-#     closest_point_deg = Navigation.closest_point_to_pole(pos₁_deg, bearing)
-#     if Navigation.distance(pos₁_deg, pos₂_deg) > Navigation.distance(pos₁_deg,
-#         closest_point_deg)
-#         return pos₁.lat, pos₂.lat, closest_point_deg.ϕ
-#     else
-#         return pos₁.lat, pos₂.lat
-#     end
-# end
-
 function latitude_options(pos₁::Point_deg, pos₂::Point_deg)
     bearing = Navigation.bearing(pos₁, pos₂)
     closest_point_deg = Navigation.closest_point_to_pole(pos₁, bearing)
