@@ -62,7 +62,8 @@ using ..util
 struct FreeRoutePoint
     type::AbstractString
     name::AbstractString
-    point::Union{Point, AbstractString, Missing}
+    # point::Union{Point, AbstractString, Missing}
+    point::Union{Point_deg, AbstractString, Missing}
 end
 
 struct FreeRouteAirports

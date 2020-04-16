@@ -113,8 +113,10 @@ function box_spherical_polygon(points::Array{Float64,2})
         if isempty(previous_point)
             previous_point = point
         else
-            pos₁ = Point(previous_point[1], previous_point[2])
-            pos₂ = Point(point[1], point[2])
+            # pos₁ = Point(previous_point[1], previous_point[2])
+            # pos₂ = Point(point[1], point[2])
+            pos₁ = Point_deg(previous_point[1], previous_point[2])
+            pos₂ = Point_deg(point[1], point[2])
             append!(lats_max, maximum(latitude_options(pos₁, pos₂)))
             append!(lats_min, minimum(latitude_options(pos₁, pos₂)))
             previous_point = point
@@ -129,21 +131,32 @@ function box_spherical_polygon(points::Array{Float64,2})
     return box
 end
 
-function latitude_options(pos₁::Point, pos₂::Point)
-    pos₁_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
-    pos₂_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
-    bearing = Navigation.bearing(pos₁_deg, pos₂_deg)
-    closest_point_deg = Navigation.closest_point_to_pole(pos₁_deg, bearing)
-    if Navigation.distance(pos₁_deg, pos₂_deg) > Navigation.distance(pos₁_deg,
+# function latitude_options(pos₁::Point, pos₂::Point)
+#     pos₁_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
+#     pos₂_deg = Navigation.Point_deg(pos₁.lat, pos₁.lon)
+#     bearing = Navigation.bearing(pos₁_deg, pos₂_deg)
+#     closest_point_deg = Navigation.closest_point_to_pole(pos₁_deg, bearing)
+#     if Navigation.distance(pos₁_deg, pos₂_deg) > Navigation.distance(pos₁_deg,
+#         closest_point_deg)
+#         return pos₁.lat, pos₂.lat, closest_point_deg.ϕ
+#     else
+#         return pos₁.lat, pos₂.lat
+#     end
+# end
+
+function latitude_options(pos₁::Point_deg, pos₂::Point_deg)
+    bearing = Navigation.bearing(pos₁, pos₂)
+    closest_point_deg = Navigation.closest_point_to_pole(pos₁, bearing)
+    if Navigation.distance(pos₁, pos₂) > Navigation.distance(pos₁,
         closest_point_deg)
-        return pos₁.lat, pos₂.lat, closest_point_deg.ϕ
+        return pos₁.ϕ, pos₂.ϕ, closest_point_deg.ϕ
     else
-        return pos₁.lat, pos₂.lat
+        return pos₁.ϕ, pos₂.ϕ
     end
 end
 
 function isinsidebox(are::Airspace, point::Point)
-    return are.box[2,1] < point.lat < are.box[1,1] && are.box[2,2] < point.lon < are.box[1,2]
+    return are.box[2,1] < point.ϕ < are.box[1,1] && are.box[2,2] < point.λ < are.box[1,2]
 end
 
 end # module

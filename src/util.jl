@@ -1,7 +1,7 @@
 module util
 
 export Point, Point3D, extract_lat, extract_lon, latlon, format_date,
-format_datetime, format_time
+format_datetime, format_time, Point_deg
 
 import Base:(convert)
 using Dates
@@ -83,7 +83,8 @@ function latlon(str_lat::AbstractString, str_lon::AbstractString)
     lat = extract_lat(str_lat)
     lon = extract_lon(str_lon)
     if !isnan(lat*lon)
-        return Point(lat, lon)
+        # return Point(lat, lon)
+        return Point_deg(lat, lon)
     else
         return NaN
     end

@@ -161,7 +161,8 @@ struct AllFtPointProfile
     FL::Union{Int64, Missing}
     pointDistance::Union{Int64, Missing}
     pointType::AbstractString
-    geoPointId::Union{Point, AbstractString}
+    geoPointId::Union{Point_deg, AbstractString}
+    # geoPointId::Union{Point, AbstractString}
     ratio::Union{Int64, Missing}
     isVisible::Bool  # Y indicated IFR/GAT/IFPSTART, N indicates VFR/OAT/IFPSTOP/STAY
     function AllFtPointProfile(x::AbstractString)
@@ -206,8 +207,10 @@ struct AllFtAirspaceProfile
     sector::AbstractString
     exit_datetime::Union{DateTime, Missing}
     fir::AbstractString
-    entry_geoPointId::Union{Point, AbstractString}
-    exit_geoPointId::Union{Point, AbstractString}
+    entry_geoPointId::Union{Point_deg, AbstractString}
+    exit_geoPointId::Union{Point_deg, AbstractString}
+    # entry_geoPointId::Union{Point, AbstractString}
+    # exit_geoPointId::Union{Point, AbstractString}
     entry_FL::Union{Int64, Missing}
     exit_FL::Union{Int64, Missing}
     entry_pointDistance::Union{Int64, Missing}
