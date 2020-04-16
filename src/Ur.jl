@@ -26,7 +26,8 @@ module Ur
 
 export read
 
-include("utility.jl")
+# include("utility.jl")
+using ..util
 using Dates
 
 const yyyymmdd = DateFormat("yyyy/mm/dd")

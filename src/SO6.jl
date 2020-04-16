@@ -47,7 +47,8 @@ module SO6
 
 export read
 
-include("utility.jl")
+# include("utility.jl")
+using ..util
 using CSV
 using Dates
 using DataFrames

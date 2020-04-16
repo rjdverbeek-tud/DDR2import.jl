@@ -28,7 +28,8 @@ Mot fileformat example
 """
 module Mot
 
-include("utility.jl")
+# include("utility.jl")
+using ..util
 using Dates
 
 export read

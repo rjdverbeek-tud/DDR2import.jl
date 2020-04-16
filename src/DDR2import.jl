@@ -58,6 +58,7 @@ See EUROCONTROL NEST Manual Section 9.7 for fileformat descriptions
 
 """
 module DDR2import
+    include("util.jl")
     include("T5.jl")
     include("SO6.jl")
     include("Exp2.jl")

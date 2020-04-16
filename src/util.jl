@@ -1,31 +1,43 @@
-# module NestFormat
-#
-# export format_date, format_datetime, format_time
-#
-using Dates
+module util
 
-"Point_deg type with latitude `lat` [deg] and longitude `lon` [deg]"
+export Point, Point3D, extract_lat, extract_lon, latlon, format_date,
+format_datetime, format_time
+
+import Base:(convert)
+using Dates
+using Navigation: Point_deg, Point_rad
+
+"Point type with latitude `lat` [deg] and longitude `lon` [deg]"
 struct Point{T<:Float64}
     lat::T
     lon::T
 end
 
-"Point_deg type with latitude `lat` [deg], longitude `lon` [deg] and altitude [m]"
+"Point type with latitude `lat` [deg], longitude `lon` [deg] and altitude [m]"
 struct Point3D{T<:Float64}
     lat::T
     lon::T
     alt::T
 end
 
+Base.:convert(type::Type{Point_deg}, x::Point) = Point_deg(x.lat, x.lon)
+Base.:convert(type::Type{Point_rad}, x::Point) = Point_rad(deg2rad(x.lat), deg2rad(x.lon))
+Base.:convert(type::Type{Point}, x::Point_deg) = Point(x.ϕ, x.λ)
+Base.:convert(type::Type{Point}, x::Point_rad) = Point(rad2deg(x.ϕ), rad2deg(x.λ))
+
 function extract_lat(str::AbstractString)
-    if str[1] in ['N', 'S']
-        sign_lat = str[1] == 'N' ? 1 : -1
-        relative = 1
-    elseif str[end] in ['N', 'S']
-        sign_lat = str[end] == 'N' ? 1 : -1
-        relative = 0
+    if length(str) > 2
+        if str[1] in ['N', 'S']
+            sign_lat = str[1] == 'N' ? 1 : -1
+            relative = 1
+        elseif str[end] in ['N', 'S']
+            sign_lat = str[end] == 'N' ? 1 : -1
+            relative = 0
+        else
+            return NaN
+        end
     else
-        return missing
+        return NaN
     end
 
     lat_h = parse(Float64, str[relative+1:relative+2])
@@ -41,14 +53,18 @@ function extract_lat(str::AbstractString)
 end
 
 function extract_lon(str::AbstractString)
-    if str[1] in ['E', 'W']
-        sign_lon = str[1] == 'E' ? 1 : -1
-        relative = 1
-    elseif str[end] in ['E', 'W']
-        sign_lon = str[end] == 'E' ? 1 : -1
-        relative = 0
+    if length(str) > 3
+        if str[1] in ['E', 'W']
+            sign_lon = str[1] == 'E' ? 1 : -1
+            relative = 1
+        elseif str[end] in ['E', 'W']
+            sign_lon = str[end] == 'E' ? 1 : -1
+            relative = 0
+        else
+            return NaN
+        end
     else
-        return missing
+        return NaN
     end
 
     lon_h = parse(Float64, str[relative+1:relative+3])
@@ -66,11 +82,25 @@ end
 function latlon(str_lat::AbstractString, str_lon::AbstractString)
     lat = extract_lat(str_lat)
     lon = extract_lon(str_lon)
-    if !ismissing(lat*lon)
+    if !isnan(lat*lon)
         return Point(lat, lon)
     else
-        return missing
+        return NaN
     end
+end
+
+function latlon(str::AbstractString)
+    eorw = "W"
+    if occursin("E", str)
+        eorw = "E"
+    else
+        eorw = "W"
+    end
+
+    split_str = split(str, eorw)
+    str_lat = split_str[1]
+    str_lon = eorw*split_str[2]
+    return latlon(str_lat, str_lon)
 end
 
 function format_date(str::Union{AbstractString, Missing}, format; addyear = Year(0))
@@ -127,3 +157,5 @@ function format_time(str::Union{AbstractString, Missing}, format)
         end
     end
 end
+
+end  #Module

@@ -12,7 +12,8 @@ module Crco
 
 export read
 
-include("utility.jl")
+# include("utility.jl")
+using ..util  # new
 using Format
 using CSV
 using Dates

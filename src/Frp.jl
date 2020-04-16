@@ -56,7 +56,8 @@ module Frp
 
 export read
 
-include("utility.jl")
+# include("utility.jl")
+using ..util
 
 struct FreeRoutePoint
     type::AbstractString
