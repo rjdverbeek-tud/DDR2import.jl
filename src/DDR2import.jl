@@ -80,6 +80,11 @@ module DDR2import
     include("Crco.jl")
     include("Ur.jl")
     include("Arp.jl")
+    include("Country.jl")
+    include("Operator.jl")
+    include("Routes.jl")
+    include("Runway.jl")
+    include("For.jl")
 end # module
 
 #TODO Add tests for last element in test files.

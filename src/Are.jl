@@ -54,6 +54,8 @@ struct Airspace
     box::Array{Float64, 2}
 end
 
+
+#TODO Remove open. Just use eachline
 function read(filename)
     dict = Dict{String, Airspace}()
     open(filename) do file
