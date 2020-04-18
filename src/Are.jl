@@ -96,15 +96,15 @@ function read(filename)
     return dict
 end
 
-function isinside(are::Airspace, point::Point)
-    # test if inside box
-    if isinsidebox(are, point)
-        #test if inside polygon
-        return NaN
-    else
-        return false
-    end
-end
+# function isinside(are::Airspace, point::Point)
+#     # test if inside box
+#     if isinsidebox(are, point)
+#         #test if inside polygon
+#         return NaN
+#     else
+#         return false
+#     end
+# end
 
 function box_spherical_polygon(points::Array{Float64,2})
     box = Array{Float64, 2}(undef, 2, 2)
@@ -144,8 +144,8 @@ function latitude_options(pos₁::Point_deg, pos₂::Point_deg)
     end
 end
 
-function isinsidebox(are::Airspace, point::Point)
-    return are.box[2,1] < point.ϕ < are.box[1,1] && are.box[2,2] < point.λ < are.box[1,2]
-end
+# function isinsidebox(are::Airspace, point::Point)
+#     return are.box[2,1] < point.ϕ < are.box[1,1] && are.box[2,2] < point.λ < are.box[1,2]
+# end
 
 end # module
